@@ -149,3 +149,37 @@
   pointer-events: none;
   mix-blend-mode: multiply;
 }
+
+/* Form input */
+.input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid oklch(0.15 0.01 60 / 0.15);
+  background: var(--color-card);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  color: var(--color-foreground);
+  outline: none;
+  transition: border-color 200ms, box-shadow 200ms;
+}
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px oklch(0.66 0.22 33 / 0.15);
+}
+
+/* Legal prose */
+.prose-legal { color: var(--color-muted-foreground); font-size: 0.95rem; line-height: 1.7; }
+.prose-legal p { margin: 0 0 1rem; }
+.prose-legal h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--color-foreground);
+  font-size: 1.5rem;
+  margin: 2rem 0 0.75rem;
+}
+.prose-legal ul, .prose-legal ol { margin: 0 0 1rem 1.25rem; }
+.prose-legal ul { list-style: disc; }
+.prose-legal ol { list-style: decimal; }
+.prose-legal li { margin-bottom: 0.35rem; }
+.prose-legal a { color: var(--color-foreground); text-decoration: underline; text-underline-offset: 3px; }
+.prose-legal strong { color: var(--color-foreground); }
