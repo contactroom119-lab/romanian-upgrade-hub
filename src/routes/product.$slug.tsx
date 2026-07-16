@@ -202,7 +202,7 @@ function ProductPage() {
             More from <span className="text-primary">{category.name}</span>
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {related.map((p, i) => (
+            {related.map((p: (typeof related)[number], i: number) => (
               <ProductCard key={p.slug} product={p} index={i} />
             ))}
           </div>
