@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
-import { Marquee } from "@/components/marquee";
 import { ProductCard } from "@/components/product-card";
 import { CATEGORIES, PRODUCTS, productsInCategory } from "@/data/catalog";
 
@@ -15,258 +14,250 @@ export const Route = createFileRoute("/")({
         content:
           "Posters, prints and wearable art from Room 119. Printed with care in Romania — make space for chaos, calm, and everything in between.",
       },
-      { property: "og:image", content: "https://static.wixstatic.com/media/80218c_37a2ff7ff4e64576928c7cb745615567~mv2.png" },
+      {
+        property: "og:image",
+        content:
+          "https://static.wixstatic.com/media/80218c_37a2ff7ff4e64576928c7cb745615567~mv2.png",
+      },
     ],
   }),
 });
 
-const HERO_VIDEO = "https://video.wixstatic.com/video/80218c_bae0ed957dbd41d8b641c3763345dc1f/1080p/mp4/file.mp4";
+const HERO_VIDEO =
+  "https://video.wixstatic.com/video/80218c_bae0ed957dbd41d8b641c3763345dc1f/1080p/mp4/file.mp4";
 
 function HomePage() {
-  const blush = productsInCategory("in-a-blush-state");
-  const featured = PRODUCTS.slice(0, 4);
+  const featured = productsInCategory("in-a-blush-state");
+  const more = PRODUCTS.slice(0, 4);
 
   return (
     <PageShell>
-      {/* HERO */}
-      <section id="top" className="relative overflow-hidden">
-        <div className="absolute inset-0">
+      {/* ── HERO ──────────────────────────────────────────────────── */}
+      <section className="relative">
+        <div className="relative h-[78vh] min-h-[520px] w-full overflow-hidden bg-ink">
           <video
             src={HERO_VIDEO}
             autoPlay
             muted
             loop
             playsInline
-            className="h-full w-full object-cover opacity-40"
+            className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-ink/10" />
 
-        <div className="relative mx-auto grid max-w-[1400px] gap-10 px-4 pb-16 pt-20 md:grid-cols-[1.1fr_1fr] md:gap-16 md:px-8 md:pt-28">
-          <div className="flex flex-col justify-center">
-            <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-ink/15 bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em]">
-              <span className="size-2 rounded-full bg-primary animate-pulse" />
-              Your Space. Your Rules.
-            </div>
-            <h1 className="font-display text-[15vw] leading-[0.85] text-primary md:text-[9rem]">
-              ROOM<br />119.
-            </h1>
-            <p className="mt-6 max-w-lg text-lg text-muted-foreground md:text-xl">
-              Art you can <em className="font-marker not-italic text-foreground">wear</em>,{" "}
-              <em className="font-marker not-italic text-foreground">hang</em>, and{" "}
-              <em className="font-marker not-italic text-foreground">live in</em>. Posters, prints and
-              everyday chaos — printed with care in Romania.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/shop"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:bg-primary/90"
-              >
-                Shop the Room
-                <ArrowRight className="size-4 transition group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to="/custom"
-                className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-card px-6 py-3 font-semibold hover:bg-ink hover:text-paper transition"
-              >
-                Make it custom
-              </Link>
-            </div>
-
-            <div className="mt-12 grid grid-cols-3 gap-4 text-sm md:max-w-md">
-              {[
-                { k: "119+", v: "designs" },
-                { k: "RO", v: "printed" },
-                { k: "48h", v: "shipping" },
-              ].map((s) => (
-                <div key={s.k} className="border-l-2 border-primary pl-3">
-                  <div className="font-display text-2xl md:text-3xl">{s.k}</div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">{s.v}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Retro TV sticker */}
-          <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
-            <div className="animate-float relative aspect-[4/3] w-full rotate-[-4deg] rounded-2xl bg-card p-3 shadow-[var(--shadow-poster)]">
-              <div className="relative h-full w-full overflow-hidden rounded-xl bg-ink">
-                <video
-                  src={HERO_VIDEO}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="h-full w-full object-cover"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_3px,oklch(0_0_0/0.15)_3px,oklch(0_0_0/0.15)_4px)] mix-blend-overlay" />
-                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-ink/90 to-transparent p-4">
-                  <span className="font-marker text-3xl text-primary">WELCOME!</span>
-                  <span className="rounded-full bg-primary px-2 py-1 font-display text-xs text-primary-foreground">CH 119</span>
-                </div>
+          <div className="relative mx-auto flex h-full max-w-[1400px] flex-col justify-end px-4 pb-14 md:px-10 md:pb-20">
+            <div className="max-w-2xl text-paper">
+              <div className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-paper/80">
+                <span className="size-1.5 rounded-full bg-primary" />
+                New season · Room 119
               </div>
-              <span className="tape absolute inset-x-0" />
-            </div>
-            <div className="sticker absolute -bottom-6 -left-4 rotate-[-8deg] rounded-full bg-primary px-4 py-2 font-marker text-sm text-primary-foreground shadow-[var(--shadow-tape)]">
-              new drops!
-            </div>
-            <div className="sticker absolute -right-2 top-6 rotate-[12deg] rounded-full border-2 border-ink bg-paper px-3 py-1 font-display text-sm">
-              EST. 119
+              <h1 className="font-display text-[13vw] leading-[0.9] md:text-[7.5rem]">
+                Make space<br />
+                for <em className="font-marker not-italic text-primary">everything</em>.
+              </h1>
+              <p className="mt-5 max-w-lg text-base text-paper/80 md:text-lg">
+                Posters, prints and wearable art. Printed with care in Romania.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/shop"
+                  className="inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-ink transition hover:bg-primary hover:text-primary-foreground"
+                >
+                  Shop all
+                </Link>
+                <Link
+                  to="/category/$slug"
+                  params={{ slug: "in-a-blush-state" }}
+                  className="inline-flex items-center gap-2 rounded-full border border-paper/40 px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-paper transition hover:bg-paper hover:text-ink"
+                >
+                  Bestsellers
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <Marquee reverse />
-
-      {/* CATEGORIES */}
-      <section id="categories" className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
+      {/* ── COLLECTION LIST : GRID ───────────────────────────────── */}
+      <section className="mx-auto max-w-[1400px] px-4 py-20 md:px-10 md:py-28">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <div className="mb-2 font-marker text-sm text-primary">01 / Shop by</div>
-            <h2 className="font-display text-5xl md:text-7xl">
-              Shop by <span className="text-primary">category</span>
+            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+              Collections
+            </div>
+            <h2 className="font-display text-4xl leading-[0.95] md:text-6xl">
+              Shop by collection
             </h2>
           </div>
           <Link
             to="/shop"
-            className="link-reveal hidden items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] md:inline-flex"
+            className="hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] md:inline-flex"
           >
             View all <ArrowUpRight className="size-4" />
           </Link>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {CATEGORIES.map((c, i) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {CATEGORIES.map((c) => (
             <Link
               key={c.slug}
               to="/category/$slug"
               params={{ slug: c.slug }}
-              className="group grainy relative flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-card shadow-[var(--shadow-tape)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-poster)]"
+              className="group relative flex flex-col overflow-hidden rounded-xl bg-card"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+              <div className="relative aspect-[4/5] overflow-hidden bg-muted">
                 <img
                   src={c.img}
                   alt={c.name}
                   loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
                 />
-                <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-2 py-1 font-display text-xs text-paper backdrop-blur">
-                  0{i + 1}
-                </span>
               </div>
-              <div className="flex items-end justify-between gap-3 p-5">
+              <div className="flex items-center justify-between gap-3 pt-4">
                 <div>
-                  <div className="font-display text-2xl leading-none">{c.name.toUpperCase()}</div>
-                  <div className="mt-1 font-marker text-sm text-muted-foreground">{c.tagline}</div>
+                  <div className="font-display text-xl leading-none">{c.name}</div>
+                  <div className="mt-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    {c.tagline}
+                  </div>
                 </div>
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition group-hover:rotate-45">
-                  <ArrowUpRight className="size-4" />
-                </span>
+                <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* BESTSELLERS */}
-      <section id="bestsellers" className="relative border-y border-ink/10 bg-ink text-paper">
-        <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
+      {/* ── FEATURED COLLECTION ──────────────────────────────────── */}
+      <section className="border-t border-ink/10 bg-card">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-10 md:py-28">
           <div className="mb-10 flex items-end justify-between gap-6">
             <div>
-              <div className="mb-2 font-marker text-sm text-primary">02 / Best of</div>
-              <h2 className="font-display text-5xl md:text-7xl">
-                Bestsellers — <span className="text-primary">in a blush state</span>
+              <div className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                Featured
+              </div>
+              <h2 className="font-display text-4xl leading-[0.95] md:text-6xl">
+                In a Blush State
               </h2>
+              <p className="mt-3 max-w-lg text-sm text-muted-foreground md:text-base">
+                Soft riot, pink noise — our best-loved series, printed in limited runs.
+              </p>
             </div>
             <Link
               to="/category/$slug"
               params={{ slug: "in-a-blush-state" }}
-              className="link-reveal hidden items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] md:inline-flex"
+              className="hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] md:inline-flex"
             >
-              View all <ArrowUpRight className="size-4" />
+              View collection <ArrowUpRight className="size-4" />
             </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {blush.map((p, i) => (
+            {featured.map((p, i) => (
               <ProductCard key={p.slug} product={p} index={i} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURED */}
-      <section className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <div>
-            <div className="mb-2 font-marker text-sm text-primary">03 / Handpicked</div>
-            <h2 className="font-display text-5xl md:text-7xl">
-              Featured <span className="text-primary">drops</span>
-            </h2>
+      {/* ── EDITORIAL SPLIT ──────────────────────────────────────── */}
+      <section className="mx-auto max-w-[1400px] px-4 py-20 md:px-10 md:py-28">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-ink">
+            <video
+              src={HERO_VIDEO}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-full w-full object-cover"
+            />
           </div>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((p, i) => (
-            <ProductCard key={p.slug} product={p} index={i} />
-          ))}
+          <div className="flex flex-col justify-center">
+            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+              The studio
+            </div>
+            <h2 className="font-display text-4xl leading-[0.95] md:text-6xl">
+              Your space.<br />
+              <em className="font-marker not-italic text-primary">Your rules.</em>
+            </h2>
+            <p className="mt-6 max-w-lg text-base text-muted-foreground md:text-lg">
+              Room 119 is a small print studio in Romania. We make posters and wearable
+              art that give a room — or an outfit — a bit of personality. Everything's
+              printed to order, on good paper, with heavy ink.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-paper transition hover:bg-primary hover:text-primary-foreground"
+              >
+                Our story
+              </Link>
+              <Link
+                to="/custom"
+                className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:bg-ink hover:text-paper"
+              >
+                Custom orders
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CUSTOM CTA */}
-      <section
-        id="custom"
-        className="relative overflow-hidden bg-primary text-primary-foreground"
-      >
-        <div
-          className="pointer-events-none absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 20%, oklch(1 0 0 / 0.4) 0, transparent 40%), radial-gradient(circle at 80% 60%, oklch(0 0 0 / 0.3) 0, transparent 45%)",
-          }}
-        />
-        <div className="relative mx-auto grid max-w-[1400px] gap-10 px-4 py-24 md:grid-cols-[1.4fr_1fr] md:px-8 md:py-32">
-          <div>
-            <div className="mb-4 font-marker text-sm">04 / Made for you</div>
-            <h2 className="font-display text-5xl leading-[0.9] md:text-8xl">
-              Not seeing exactly<br />
-              what you're <em className="font-marker not-italic">looking for?</em>
-            </h2>
-            <p className="mt-8 max-w-xl text-lg opacity-90">
-              Spot a poster you'd wear on a t-shirt instead? Tweak a design, move it onto something else, or
-              create something from scratch — Room 119 is about making spaces (and outfits) feel more like{" "}
-              <em className="font-marker not-italic">you</em>.
-            </p>
+      {/* ── MORE PRODUCTS ────────────────────────────────────────── */}
+      <section className="border-t border-ink/10">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-10 md:py-28">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <div>
+              <div className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+                Latest
+              </div>
+              <h2 className="font-display text-4xl leading-[0.95] md:text-6xl">
+                New arrivals
+              </h2>
+            </div>
             <Link
-              to="/custom"
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 font-semibold text-paper transition hover:bg-paper hover:text-ink"
+              to="/shop"
+              className="hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] md:inline-flex"
             >
-              Start a custom order <ArrowRight className="size-4" />
+              Shop all <ArrowUpRight className="size-4" />
             </Link>
           </div>
-          <div className="relative">
-            <div className="absolute -right-8 -top-8 hidden aspect-square w-64 rotate-12 rounded-3xl border-2 border-primary-foreground/40 md:block" />
-            <div className="relative rotate-[-3deg] rounded-3xl bg-card p-6 text-ink shadow-[var(--shadow-poster)]">
-              <div className="font-marker text-sm text-primary">room119 // custom order</div>
-              <ul className="mt-4 space-y-3 text-sm">
-                {[
-                  "Tell me the design + the object (poster, tee, hoodie, tote…)",
-                  "I mock it up, you approve",
-                  "Printed & shipped from Romania",
-                ].map((t, i) => (
-                  <li key={t} className="flex gap-3">
-                    <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary font-display text-xs text-primary-foreground">
-                      {i + 1}
-                    </span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 border-t border-dashed border-ink/30 pt-4 font-marker text-primary">
-                ✂ - - - - - - - - - - - - - - - - - -
-              </div>
-            </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {more.map((p, i) => (
+              <ProductCard key={p.slug} product={p} index={i} />
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER STRIP ─────────────────────────────────────── */}
+      <section className="bg-ink text-paper">
+        <div className="mx-auto grid max-w-[1400px] gap-8 px-4 py-16 md:grid-cols-[1.2fr_1fr] md:items-end md:px-10 md:py-20">
+          <div>
+            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+              Newsletter
+            </div>
+            <h2 className="font-display text-4xl leading-[0.95] md:text-6xl">
+              Get first dibs on new drops.
+            </h2>
+          </div>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex w-full items-center gap-2 border-b border-paper/30 pb-3"
+          >
+            <input
+              type="email"
+              placeholder="your@email.com"
+              className="flex-1 bg-transparent text-lg outline-none placeholder:text-paper/40"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-primary px-5 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-foreground transition hover:bg-paper hover:text-ink"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
       </section>
     </PageShell>
