@@ -17,7 +17,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
         />
         <div className="crt-overlay" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/40 to-ink/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/25 to-ink/95" />
 
       {!compact && (
         <div className="relative mx-auto max-w-[1400px] px-4 py-24 text-center md:px-8 md:py-32">
