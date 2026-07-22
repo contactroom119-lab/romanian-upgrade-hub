@@ -1,9 +1,9 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { getProduct, SIZE_MULT, type Product } from "./room119-data";
+import { getProduct, type ProductSize } from "./room119-data";
 
 export type CartLine = {
   slug: string;
-  size: keyof typeof SIZE_MULT;
+  size: ProductSize;
   qty: number;
 };
 
@@ -51,7 +51,7 @@ export function useCart() {
   return { lines: mounted ? lines : [], mounted };
 }
 
-export function addToCart(slug: string, size: keyof typeof SIZE_MULT = "A3", qty = 1) {
+export function addToCart(slug: string, size: ProductSize, qty = 1) {
   hydrate();
   const idx = state.findIndex((l) => l.slug === slug && l.size === size);
   if (idx >= 0) state = state.map((l, i) => (i === idx ? { ...l, qty: l.qty + qty } : l));
@@ -60,13 +60,13 @@ export function addToCart(slug: string, size: keyof typeof SIZE_MULT = "A3", qty
   emit();
 }
 
-export function updateQty(slug: string, size: keyof typeof SIZE_MULT, qty: number) {
+export function updateQty(slug: string, size: ProductSize, qty: number) {
   state = qty <= 0 ? state.filter((l) => !(l.slug === slug && l.size === size)) : state.map((l) => (l.slug === slug && l.size === size ? { ...l, qty } : l));
   persist();
   emit();
 }
 
-export function removeLine(slug: string, size: keyof typeof SIZE_MULT) {
+export function removeLine(slug: string, size: ProductSize) {
   state = state.filter((l) => !(l.slug === slug && l.size === size));
   persist();
   emit();
@@ -78,10 +78,10 @@ export function clearCart() {
   emit();
 }
 
-export function linePrice(line: CartLine, product?: Product) {
+export function linePrice(line: CartLine, product?: { price: number }) {
   const p = product ?? getProduct(line.slug);
   if (!p) return 0;
-  return p.price * SIZE_MULT[line.size] * line.qty;
+  return p.price * line.qty;
 }
 
 export function cartTotals(lines: CartLine[]) {

@@ -6,15 +6,18 @@ import { Mail, Phone, MapPin, Clock, Instagram, Music2, CreditCard, Truck, Shiel
 export function Footer({ compact = false }: { compact?: boolean }) {
   return (
     <section id="footer" className="relative overflow-hidden bg-ink text-paper">
-      <video
-        src={FOOTER_VIDEO}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover opacity-20"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/85 to-ink" />
+      <div className="tv-frame">
+        <video
+          src={FOOTER_VIDEO}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="crt-overlay" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/40 to-ink/95" />
 
       {!compact && (
         <div className="relative mx-auto max-w-[1400px] px-4 py-24 text-center md:px-8 md:py-32">
@@ -27,7 +30,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
 
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="mx-auto mt-12 flex max-w-md items-center gap-2 rounded-full border border-paper/20 bg-paper/5 p-2 backdrop-blur"
+            className="mx-auto mt-12 flex max-w-md items-center gap-2 rounded-full border border-paper/20 bg-paper/10 p-2 backdrop-blur"
           >
             <input
               type="email"
@@ -73,7 +76,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
               ROOM<span className="text-primary">/</span>119
             </div>
             <p className="mt-3 max-w-xs text-sm text-paper/70">
-              Postere, printuri și artă purtabilă. Făcute, imprimate și expediate din România.
+              Postere, tricouri și artă purtabilă. Făcute, imprimate și expediate din România.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-paper/80">
@@ -112,6 +115,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
               <li><Link to="/category/$slug" params={{ slug: "monochrome" }} className="link-reveal">Monochrome</Link></li>
               <li><Link to="/category/$slug" params={{ slug: "in-a-blush-state" }} className="link-reveal">In a Blush State</Link></li>
               <li><Link to="/category/$slug" params={{ slug: "red-flags-only" }} className="link-reveal">Red Flags Only</Link></li>
+              <li><Link to="/category/$slug" params={{ slug: "tricouri" }} className="link-reveal">Tricouri</Link></li>
               <li><Link to="/category/$slug" params={{ slug: "all-the-things" }} className="link-reveal">All the Things</Link></li>
               <li><Link to="/custom" className="link-reveal">Comandă custom</Link></li>
               <li><Link to="/search" className="link-reveal">Caută</Link></li>

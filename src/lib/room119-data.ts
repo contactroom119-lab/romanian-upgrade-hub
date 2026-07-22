@@ -1,5 +1,11 @@
+import tshirtCategory from "@/assets/tshirt-category.jpg";
+import tshirtBlush from "@/assets/tshirt-blush.jpg";
+import tshirtFlags from "@/assets/tshirt-flags.jpg";
+
 export const HERO_VIDEO = "https://video.wixstatic.com/video/80218c_bae0ed957dbd41d8b641c3763345dc1f/1080p/mp4/file.mp4";
 export const FOOTER_VIDEO = "https://video.wixstatic.com/video/80218c_1c4b4b6635e8477e9a7d387f78fcb027/1080p/mp4/file.mp4";
+
+export type ProductType = "poster" | "shirt";
 
 export type Category = {
   slug: string;
@@ -32,6 +38,13 @@ export const CATEGORIES: Category[] = [
     description: "Avertismente purtate cu stil. Roșu peste tot, fără scuze.",
   },
   {
+    slug: "tricouri",
+    name: "Tricouri",
+    tagline: "Wear the room.",
+    img: tshirtCategory,
+    description: "Arta care iese din cadru. Tricouri premium, printate în România.",
+  },
+  {
     slug: "all-the-things",
     name: "All the Things",
     tagline: "Everything, everywhere.",
@@ -49,6 +62,7 @@ export type Product = {
   img: string;
   category: string; // category slug
   description: string;
+  type: ProductType;
 };
 
 export const PRODUCTS: Product[] = [
@@ -61,6 +75,7 @@ export const PRODUCTS: Product[] = [
     img: "https://static.wixstatic.com/media/80218c_5a828cb3853749e6969d4045d1a802ba~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/80218c_5a828cb3853749e6969d4045d1a802ba~mv2.png",
     category: "in-a-blush-state",
     description: "Poster A3 imprimat pe hârtie mată premium 250g. Roz obraznic, cu gheare.",
+    type: "poster",
   },
   {
     slug: "no-1-in-a-blush-state",
@@ -71,6 +86,7 @@ export const PRODUCTS: Product[] = [
     img: "https://static.wixstatic.com/media/80218c_fe2a256a79e34cad9f5091f61ec80018~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/80218c_fe2a256a79e34cad9f5091f61ec80018~mv2.png",
     category: "in-a-blush-state",
     description: "Zahăr, zahăr, zahăr. Poster A3 pe hârtie mată 250g.",
+    type: "poster",
   },
   {
     slug: "no-2-in-a-blush-state",
@@ -81,6 +97,7 @@ export const PRODUCTS: Product[] = [
     img: "https://static.wixstatic.com/media/80218c_9cd631bc3e474a9099795c865160b708~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/80218c_9cd631bc3e474a9099795c865160b708~mv2.png",
     category: "in-a-blush-state",
     description: "Suflă tare. Poster A3 pe hârtie mată premium.",
+    type: "poster",
   },
   {
     slug: "no-3-in-a-blush-state",
@@ -91,6 +108,40 @@ export const PRODUCTS: Product[] = [
     img: "https://static.wixstatic.com/media/80218c_9d91a880c558471fbc31f34928b5822b~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/80218c_9d91a880c558471fbc31f34928b5822b~mv2.png",
     category: "in-a-blush-state",
     description: "Din adâncuri. Poster A3 pe hârtie mată premium.",
+    type: "poster",
+  },
+  {
+    slug: "tricou-room-box",
+    no: 101,
+    name: "Tricou ROOM BOX",
+    price: 149,
+    tag: "Wear the room",
+    img: tshirtCategory,
+    category: "tricouri",
+    description: "Tricou oversized 100% bumbac premium 240g. Design minimalist pe piept.",
+    type: "shirt",
+  },
+  {
+    slug: "tricou-abstract-shapes",
+    no: 102,
+    name: "Tricou Abstract Shapes",
+    price: 149,
+    tag: "Streetwear vibe",
+    img: tshirtBlush,
+    category: "tricouri",
+    description: "Tricou oversized crem, bumbac 240g. Print tipografic negru & roșu.",
+    type: "shirt",
+  },
+  {
+    slug: "tricou-krah",
+    no: 103,
+    name: "Tricou KRAH",
+    price: 159,
+    tag: "Red energy",
+    img: tshirtFlags,
+    category: "tricouri",
+    description: "Tricou negru oversized, bumbac 240g. Print energic, marker style.",
+    type: "shirt",
   },
 ];
 
@@ -100,5 +151,25 @@ export const getCategory = (slug: string) => CATEGORIES.find((c) => c.slug === s
 export const getProduct = (slug: string) => PRODUCTS.find((p) => p.slug === slug);
 export const productsByCategory = (slug: string) => PRODUCTS.filter((p) => p.category === slug);
 
-export const SIZES = ["A4", "A3", "A2"] as const;
-export const SIZE_MULT: Record<(typeof SIZES)[number], number> = { A4: 0.75, A3: 1, A2: 1.6 };
+export const POSTER_SIZES = ["A4", "A3", "A2"] as const;
+export const SHIRT_SIZES = ["S", "M", "L", "XL", "XXL"] as const;
+
+export const SIZE_MULT: Record<(typeof POSTER_SIZES)[number] | (typeof SHIRT_SIZES)[number], number> = {
+  A4: 0.75,
+  A3: 1,
+  A2: 1.6,
+  S: 1,
+  M: 1,
+  L: 1,
+  XL: 1.05,
+  XXL: 1.1,
+};
+
+export type ProductSize = keyof typeof SIZE_MULT;
+
+export const productSizes = (type: ProductType) => (type === "shirt" ? SHIRT_SIZES : POSTER_SIZES);
+
+export const sizeLabel = (type: ProductType) => (type === "shirt" ? "Mărime" : "Format");
+
+export const isPoster = (p: Product) => p.type === "poster";
+export const isShirt = (p: Product) => p.type === "shirt";

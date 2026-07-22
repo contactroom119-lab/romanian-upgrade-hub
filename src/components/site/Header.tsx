@@ -60,7 +60,7 @@ export function Header() {
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search posters…"
+              placeholder="Search posters & shirts…"
               className="w-40 bg-transparent text-sm outline-none placeholder:text-paper/50"
             />
           </form>
@@ -89,7 +89,7 @@ export function Header() {
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search posters…"
+              placeholder="Search posters & shirts…"
               className="w-full bg-transparent text-sm outline-none placeholder:text-paper/50"
             />
           </form>
