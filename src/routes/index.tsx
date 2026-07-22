@@ -127,140 +127,175 @@ function Room119Page() {
         </div>
       </section>
 
-      {/* EDITORIAL FEATURE — bestsellers as a considered spread */}
-      <section id="featured" className="border-t border-ink/10">
-        <div className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
-          <div className="mb-14 flex flex-col gap-3">
-            <div className="font-marker text-sm text-primary">Index / 02 — Currently on rotation</div>
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      {/* EDITORIAL FEATURE — bestsellers on dark, magazine spread */}
+      <section id="featured" className="relative border-t border-ink/10 bg-ink text-paper">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-screen" style={{ backgroundImage: "var(--grain)" }} />
+        <div className="relative mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-3 font-marker text-sm text-primary">Index / 02 — Currently on rotation</div>
               <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
-                The <span className="text-primary italic">quiet</span> bestsellers.
+                The <span className="text-primary italic">quiet</span><br />bestsellers.
               </h2>
-              <Link
-                to="/category/$slug"
-                params={{ slug: "in-a-blush-state" }}
-                className="link-reveal inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.25em] text-foreground md:self-auto"
-              >
-                See the full catalogue <ArrowUpRight className="size-4 text-primary" />
-              </Link>
             </div>
+            <Link
+              to="/category/$slug"
+              params={{ slug: "in-a-blush-state" }}
+              className="group inline-flex items-center gap-3 self-start border border-paper/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-paper transition hover:bg-primary hover:border-primary hover:text-primary-foreground md:self-auto"
+            >
+              See full catalogue <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-12">
-            {(() => {
-              const list = PRODUCTS.filter((p) => p.category === "in-a-blush-state").slice(0, 4);
-              const [hero, ...rest] = list;
-              return (
-                <>
-                  {hero && (
-                    <Link
-                      to="/product/$slug"
-                      params={{ slug: hero.slug }}
-                      className="group relative col-span-12 md:col-span-7"
-                    >
-                      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-muted md:aspect-[5/6]">
-                        <img src={hero.img} alt={hero.name} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" />
+          {(() => {
+            const list = PRODUCTS.filter((p) => p.category === "in-a-blush-state").slice(0, 4);
+            const [hero, ...rest] = list;
+            return (
+              <div className="grid gap-10 md:grid-cols-12 md:gap-12">
+                {hero && (
+                  <Link
+                    to="/product/$slug"
+                    params={{ slug: hero.slug }}
+                    className="group relative col-span-12 md:col-span-8"
+                  >
+                    <div className="relative aspect-[5/6] overflow-hidden bg-paper/5">
+                      <img src={hero.img} alt={hero.name} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" />
+                      <div className="absolute left-4 top-4 rounded-full border border-paper/30 bg-ink/60 px-3 py-1 font-marker text-[11px] text-primary backdrop-blur">
+                        Nº {String(hero.no).padStart(3, "0")} · cover
                       </div>
-                      <div className="mt-4 flex items-end justify-between gap-6">
-                        <div>
-                          <div className="font-marker text-xs text-primary">Nº {String(hero.no).padStart(3, "0")}</div>
-                          <div className="font-display text-2xl uppercase tracking-tight md:text-3xl">{hero.name}</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-xs uppercase tracking-widest text-muted-foreground">from</div>
-                          <div className="font-display text-2xl">{hero.price} <span className="text-sm text-muted-foreground">RON</span></div>
-                        </div>
+                    </div>
+                    <div className="mt-5 flex items-end justify-between gap-6 border-t border-paper/15 pt-4">
+                      <div className="font-display text-2xl uppercase tracking-tight md:text-4xl">{hero.name}</div>
+                      <div className="text-right">
+                        <div className="text-[10px] uppercase tracking-widest text-paper/50">from</div>
+                        <div className="font-display text-2xl text-primary">{hero.price} <span className="text-sm text-paper/60">RON</span></div>
                       </div>
-                    </Link>
-                  )}
-                  <div className="col-span-12 grid gap-8 md:col-span-5 md:content-start">
-                    {rest.map((p, i) => (
+                    </div>
+                  </Link>
+                )}
+                <ol className="col-span-12 flex flex-col divide-y divide-paper/10 md:col-span-4">
+                  {rest.map((p, i) => (
+                    <li key={p.slug}>
                       <Link
-                        key={p.slug}
                         to="/product/$slug"
                         params={{ slug: p.slug }}
-                        className="group grid grid-cols-[7rem_1fr] gap-5 border-b border-ink/10 pb-6 last:border-b-0 last:pb-0"
+                        className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-5 transition hover:pl-2"
                       >
-                        <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
-                          <img src={p.img} alt={p.name} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div className="font-display text-xl text-primary tabular-nums">0{i + 2}</div>
+                        <div>
+                          <div className="font-marker text-[11px] text-paper/50">Nº {String(p.no).padStart(3, "0")}</div>
+                          <div className="font-display text-lg uppercase leading-tight tracking-tight">{p.name}</div>
                         </div>
-                        <div className="flex flex-col justify-between py-1">
-                          <div>
-                            <div className="font-marker text-[11px] text-primary">Nº {String(p.no).padStart(3, "0")} · {String(i + 2).padStart(2, "0")}</div>
-                            <div className="font-display text-lg uppercase leading-tight tracking-tight">{p.name}</div>
-                          </div>
-                          <div className="flex items-center justify-between text-xs uppercase tracking-widest text-muted-foreground">
-                            <span>{p.category.replace(/-/g, " ")}</span>
-                            <span className="text-foreground">{p.price} <span className="text-muted-foreground">RON</span></span>
-                          </div>
+                        <div className="relative aspect-square w-16 overflow-hidden rounded-sm bg-paper/5">
+                          <img src={p.img} alt={p.name} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-110" />
                         </div>
                       </Link>
-                    ))}
-                  </div>
-                </>
-              );
-            })()}
-          </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
-      {/* WEAR IT / HANG IT — split editorial, no full-color blocks */}
-      <section className="border-t border-ink/10 bg-card">
-        <div className="mx-auto grid max-w-[1400px] gap-14 px-4 py-24 md:grid-cols-2 md:gap-16 md:px-8 md:py-32">
-          <div className="flex flex-col">
-            <div className="mb-3 font-marker text-sm text-primary">Index / 03 — Format</div>
-            <h3 className="font-display text-4xl uppercase leading-[0.9] md:text-6xl">Hang it.</h3>
-            <p className="mt-4 max-w-sm text-muted-foreground">
-              Postere pe hârtie mată premium, format A4 · A3 · A2. Ambalate în tuburi rigide, expediate din România.
-            </p>
-            <div className="relative mt-8 aspect-[4/5] overflow-hidden rounded-sm bg-muted">
-              <img src={ALL_THE_THINGS.img} alt="Tablouri" loading="lazy" className="h-full w-full object-cover" />
-            </div>
-            <Link
-              to="/category/$slug"
-              params={{ slug: "all-the-things" }}
-              className="mt-6 inline-flex items-center gap-2 self-start border-b border-primary pb-1 font-display text-sm uppercase tracking-[0.25em] text-foreground transition hover:text-primary"
-            >
-              Vezi posterele <ArrowUpRight className="size-4 text-primary" />
-            </Link>
-          </div>
-
-          <div className="flex flex-col md:mt-24">
-            <div className="mb-3 font-marker text-sm text-primary">Index / 04 — Format</div>
-            <h3 className="font-display text-4xl uppercase leading-[0.9] md:text-6xl">Wear it.</h3>
-            <p className="mt-4 max-w-sm text-muted-foreground">
-              Tricouri oversized 240g, bumbac premium, S–XXL. Aceleași designuri, dar pe tine.
-            </p>
-            <div className="relative mt-8 aspect-[4/5] overflow-hidden rounded-sm bg-muted">
-              <img src={TRICOURI_CATEGORY.img} alt="Tricouri" loading="lazy" className="h-full w-full object-cover" />
-            </div>
-            <Link
-              to="/category/$slug"
-              params={{ slug: "tricouri" }}
-              className="mt-6 inline-flex items-center gap-2 self-start border-b border-primary pb-1 font-display text-sm uppercase tracking-[0.25em] text-foreground transition hover:text-primary"
-            >
-              Vezi tricourile <ArrowUpRight className="size-4 text-primary" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* MONOCHROME — the house classics, on paper */}
-      <section className="border-t border-ink/10">
-        <div className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
-          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      {/* WEAR IT / HANG IT — dark editorial split */}
+      <section className="relative overflow-hidden border-t border-paper/10 bg-ink text-paper">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "var(--grain)" }} />
+        <div className="relative mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+          <div className="mb-16 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
-              <div className="mb-3 font-marker text-sm text-primary">Index / 05 — House classics</div>
+              <div className="mb-3 font-marker text-sm text-primary">Index / 03 — Formats</div>
               <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
-                Black. White.<br /><span className="text-primary italic">Loud.</span>
+                On paper. <span className="text-primary italic">On you.</span>
               </h2>
+            </div>
+            <div className="text-sm uppercase tracking-[0.25em] text-paper/50 md:text-right">
+              two ways to<br />live with it
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+            {[
+              { n: "01", title: "Hang it.", copy: "Postere pe hârtie mată premium. Format A4 · A3 · A2, ambalate în tuburi rigide.", img: ALL_THE_THINGS.img, slug: "all-the-things", cta: "Vezi posterele" },
+              { n: "02", title: "Wear it.", copy: "Tricouri oversized 240g, bumbac premium, S–XXL. Aceleași designuri, dar pe tine.", img: TRICOURI_CATEGORY.img, slug: "tricouri", cta: "Vezi tricourile" },
+            ].map((f) => (
+              <Link
+                key={f.slug}
+                to="/category/$slug"
+                params={{ slug: f.slug }}
+                className="group relative flex flex-col overflow-hidden border border-paper/15 transition hover:border-primary"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-paper/5">
+                  <img src={f.img} alt={f.title} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+                  <div className="absolute left-5 top-5 font-display text-sm text-primary">{f.n}</div>
+                </div>
+                <div className="flex items-end justify-between gap-6 p-6 md:p-8">
+                  <div>
+                    <div className="font-display text-3xl uppercase tracking-tight md:text-5xl">{f.title}</div>
+                    <p className="mt-3 max-w-sm text-sm text-paper/60">{f.copy}</p>
+                  </div>
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-paper/25 transition group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground">
+                    <ArrowUpRight className="size-5" />
+                  </div>
+                </div>
+                <div className="border-t border-paper/10 px-6 pb-5 pt-4 text-[11px] uppercase tracking-[0.3em] text-paper/50 md:px-8">
+                  {f.cta}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MANIFESTO — replaces "Black. White. Loud." */}
+      <section className="relative overflow-hidden border-t border-paper/10 bg-ink text-paper">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "var(--grain)" }} />
+        <div className="relative mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-40">
+          <div className="mb-4 flex items-center gap-4 font-marker text-sm text-primary">
+            <span className="h-px w-10 bg-primary" />
+            Index / 05 — Manifesto
+          </div>
+          <h2 className="font-display text-[13vw] leading-[0.88] md:text-[10rem]">
+            Make the <span className="italic text-primary">room</span><br />
+            speak <span className="italic text-primary">first</span>.
+          </h2>
+          <p className="mt-10 max-w-2xl text-lg text-paper/70 md:text-2xl">
+            Room 119 nu e o galerie. E un dulap deschis. Lucruri făcute în serii mici, tipărite în București, purtate și lipite pe pereți de oameni care nu au chef de decor „safe”.
+          </p>
+
+          <div className="mt-16 grid gap-8 border-t border-paper/15 pt-10 md:grid-cols-4">
+            {[
+              { k: "01", t: "Small batches", d: "Tiraje limitate. Când s-a terminat, s-a terminat." },
+              { k: "02", t: "Printed in RO", d: "Fiecare comandă, tipărită și expediată din București." },
+              { k: "03", t: "Loud but honest", d: "Fără mockup-uri false. Ce vezi, ai primi." },
+              { k: "04", t: "Yours to break", d: "Îndoaie, taie, lipește. E al tău, fă-l să conteze." },
+            ].map((r) => (
+              <div key={r.k} className="border-l border-paper/15 pl-5">
+                <div className="font-display text-2xl text-primary">{r.k}</div>
+                <div className="mt-2 font-display text-lg uppercase tracking-tight">{r.t}</div>
+                <p className="mt-2 text-sm text-paper/60">{r.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HOUSE CLASSICS strip — compact product row on paper (breaks up dark) */}
+      <section className="border-t border-ink/10">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-24">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <div>
+              <div className="mb-3 font-marker text-sm text-primary">Index / 06 — From the archive</div>
+              <h3 className="font-display text-4xl uppercase leading-[0.9] md:text-5xl">House classics.</h3>
             </div>
             <Link
               to="/category/$slug"
               params={{ slug: "monochrome" }}
-              className="link-reveal inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.25em] md:self-auto"
+              className="link-reveal shrink-0 text-xs font-semibold uppercase tracking-[0.25em]"
             >
-              Toate monochrome <ArrowUpRight className="size-4 text-primary" />
+              Vezi toate →
             </Link>
           </div>
           <div className="grid gap-4 md:grid-cols-4">
