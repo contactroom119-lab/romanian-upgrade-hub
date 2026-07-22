@@ -27,17 +27,17 @@ function ContactPage() {
             Comenzi custom, colaborări, întrebări despre livrare sau doar un salut — răspund în 24h (weekend-urile mai lent, promit că e din motive bune).
           </p>
           <div className="mt-10 space-y-4">
-            <a href="mailto:hello@room119.ro" className="flex items-center gap-3 text-lg hover:text-primary">
+            <a href="mailto:contact.room119@gmail.com" className="flex items-center gap-3 text-lg hover:text-primary">
               <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground"><Mail className="size-4" /></span>
-              hello@room119.ro
+              contact.room119@gmail.com
             </a>
-            <a href="tel:+40712345678" className="flex items-center gap-3 text-lg hover:text-primary">
+            <a href="tel:0722292632" className="flex items-center gap-3 text-lg hover:text-primary">
               <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground"><Phone className="size-4" /></span>
-              +40 712 345 678
+              0722 292 632
             </a>
             <div className="flex items-center gap-3 text-lg">
               <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground"><MapPin className="size-4" /></span>
-              București, RO
+              Online shop · sediul în București
             </div>
           </div>
         </div>

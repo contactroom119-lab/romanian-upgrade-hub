@@ -10,7 +10,7 @@ export const Route = createFileRoute("/legal/confidentialitate")({
   }),
   component: () => (
     <LegalLayout eyebrow="date personale" title="Politica de confidențialitate" updated="ianuarie 2026">
-      <p>Room 119 SRL („noi") respectă confidențialitatea datelor tale personale și le prelucrează în conformitate cu Regulamentul (UE) 2016/679 (GDPR) și Legea 190/2018.</p>
+      <p>Room 119 („noi") respectă confidențialitatea datelor tale personale și le prelucrează în conformitate cu Regulamentul (UE) 2016/679 (GDPR) și Legea 190/2018.</p>
 
       <h2>Ce date colectăm</h2>
       <ul>
@@ -55,7 +55,7 @@ export const Route = createFileRoute("/legal/confidentialitate")({
         <li>Retragerea consimțământului</li>
         <li>Depunerea unei plângeri la <a href="https://www.dataprotection.ro" target="_blank" rel="noreferrer">ANSPDCP</a></li>
       </ul>
-      <p>Cererile se trimit la <a href="mailto:privacy@room119.ro">privacy@room119.ro</a>. Răspundem în maxim 30 de zile.</p>
+      <p>Cererile se trimit la <a href="mailto:contact.room119@gmail.com">contact.room119@gmail.com</a>. Răspundem în maxim 30 de zile.</p>
 
       <h2>Securitate</h2>
       <p>Folosim conexiuni HTTPS, criptare la nivel de bază de date și acces restricționat. Cu toate acestea, nicio metodă de transmisie pe internet nu este 100% sigură.</p>

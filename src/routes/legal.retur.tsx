@@ -14,7 +14,7 @@ export const Route = createFileRoute("/legal/retur")({
 
       <h2>Cum returnezi</h2>
       <ol className="mb-4 list-decimal pl-6">
-        <li>Trimite un email la <a href="mailto:hello@room119.ro">hello@room119.ro</a> cu numărul comenzii și produsele pe care vrei să le returnezi.</li>
+        <li>Trimite un email la <a href="mailto:contact.room119@gmail.com">contact.room119@gmail.com</a> cu numărul comenzii și produsele pe care vrei să le returnezi.</li>
         <li>Îți răspundem în 24h cu adresa și instrucțiunile.</li>
         <li>Expediezi produsele în ambalajul original, în stare bună, pe cheltuiala ta.</li>
         <li>În 14 zile de la primirea coletului, rambursăm banii pe metoda de plată folosită inițial.</li>
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/legal/retur")({
       </ul>
 
       <h2>Produs defect sau greșit</h2>
-      <p>Dacă ai primit un produs cu defecte sau altul decât cel comandat, îl înlocuim gratuit (inclusiv transportul). Trimite-ne o poză la <a href="mailto:hello@room119.ro">hello@room119.ro</a>.</p>
+      <p>Dacă ai primit un produs cu defecte sau altul decât cel comandat, îl înlocuim gratuit (inclusiv transportul). Trimite-ne o poză la <a href="mailto:contact.room119@gmail.com">contact.room119@gmail.com</a>.</p>
 
       <h2>Formular de retur</h2>
       <p>Poți folosi <a href="https://anpc.ro" target="_blank" rel="noreferrer">formularul-tip ANPC</a> sau ne poți scrie direct pe email.</p>

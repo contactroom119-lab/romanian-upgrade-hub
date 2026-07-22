@@ -10,7 +10,7 @@ export const Route = createFileRoute("/legal/anpc")({
   }),
   component: () => (
     <LegalLayout eyebrow="protecția consumatorilor" title="ANPC & SOL">
-      <p>În calitate de consumator ai la dispoziție două canale oficiale pentru soluționarea litigiilor cu Room 119 SRL.</p>
+      <p>În calitate de consumator ai la dispoziție două canale oficiale pentru soluționarea litigiilor cu Room 119.</p>
 
       <h2>ANPC — Autoritatea Națională pentru Protecția Consumatorilor</h2>
       <ul>
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/legal/anpc")({
       <p><a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noreferrer">https://ec.europa.eu/consumers/odr</a></p>
 
       <h2>Contact direct</h2>
-      <p>Înainte de a te adresa acestor autorități, te rugăm să ne scrii la <a href="mailto:hello@room119.ro">hello@room119.ro</a> — ne dorim să rezolvăm orice problemă rapid și direct.</p>
+      <p>Înainte de a te adresa acestor autorități, te rugăm să ne scrii la <a href="mailto:contact.room119@gmail.com">contact.room119@gmail.com</a> — ne dorim să rezolvăm orice problemă rapid și direct.</p>
     </LegalLayout>
   ),
 });
