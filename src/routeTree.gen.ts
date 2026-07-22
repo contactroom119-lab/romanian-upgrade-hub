@@ -9,38 +9,259 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as DespreRouteImport } from './routes/despre'
+import { Route as CustomRouteImport } from './routes/custom'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as LegalTermeniRouteImport } from './routes/legal.termeni'
+import { Route as LegalReturRouteImport } from './routes/legal.retur'
+import { Route as LegalLivrareRouteImport } from './routes/legal.livrare'
+import { Route as LegalGdprRouteImport } from './routes/legal.gdpr'
+import { Route as LegalCookiesRouteImport } from './routes/legal.cookies'
+import { Route as LegalConfidentialitateRouteImport } from './routes/legal.confidentialitate'
+import { Route as LegalAnpcRouteImport } from './routes/legal.anpc'
+import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DespreRoute = DespreRouteImport.update({
+  id: '/despre',
+  path: '/despre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomRoute = CustomRouteImport.update({
+  id: '/custom',
+  path: '/custom',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductSlugRoute = ProductSlugRouteImport.update({
+  id: '/product/$slug',
+  path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalTermeniRoute = LegalTermeniRouteImport.update({
+  id: '/legal/termeni',
+  path: '/legal/termeni',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalReturRoute = LegalReturRouteImport.update({
+  id: '/legal/retur',
+  path: '/legal/retur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalLivrareRoute = LegalLivrareRouteImport.update({
+  id: '/legal/livrare',
+  path: '/legal/livrare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalGdprRoute = LegalGdprRouteImport.update({
+  id: '/legal/gdpr',
+  path: '/legal/gdpr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalCookiesRoute = LegalCookiesRouteImport.update({
+  id: '/legal/cookies',
+  path: '/legal/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalConfidentialitateRoute = LegalConfidentialitateRouteImport.update({
+  id: '/legal/confidentialitate',
+  path: '/legal/confidentialitate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalAnpcRoute = LegalAnpcRouteImport.update({
+  id: '/legal/anpc',
+  path: '/legal/anpc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategorySlugRoute = CategorySlugRouteImport.update({
+  id: '/category/$slug',
+  path: '/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/custom': typeof CustomRoute
+  '/despre': typeof DespreRoute
+  '/search': typeof SearchRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/legal/anpc': typeof LegalAnpcRoute
+  '/legal/confidentialitate': typeof LegalConfidentialitateRoute
+  '/legal/cookies': typeof LegalCookiesRoute
+  '/legal/gdpr': typeof LegalGdprRoute
+  '/legal/livrare': typeof LegalLivrareRoute
+  '/legal/retur': typeof LegalReturRoute
+  '/legal/termeni': typeof LegalTermeniRoute
+  '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/custom': typeof CustomRoute
+  '/despre': typeof DespreRoute
+  '/search': typeof SearchRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/legal/anpc': typeof LegalAnpcRoute
+  '/legal/confidentialitate': typeof LegalConfidentialitateRoute
+  '/legal/cookies': typeof LegalCookiesRoute
+  '/legal/gdpr': typeof LegalGdprRoute
+  '/legal/livrare': typeof LegalLivrareRoute
+  '/legal/retur': typeof LegalReturRoute
+  '/legal/termeni': typeof LegalTermeniRoute
+  '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/custom': typeof CustomRoute
+  '/despre': typeof DespreRoute
+  '/search': typeof SearchRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/legal/anpc': typeof LegalAnpcRoute
+  '/legal/confidentialitate': typeof LegalConfidentialitateRoute
+  '/legal/cookies': typeof LegalCookiesRoute
+  '/legal/gdpr': typeof LegalGdprRoute
+  '/legal/livrare': typeof LegalLivrareRoute
+  '/legal/retur': typeof LegalReturRoute
+  '/legal/termeni': typeof LegalTermeniRoute
+  '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cart'
+    | '/contact'
+    | '/custom'
+    | '/despre'
+    | '/search'
+    | '/category/$slug'
+    | '/legal/anpc'
+    | '/legal/confidentialitate'
+    | '/legal/cookies'
+    | '/legal/gdpr'
+    | '/legal/livrare'
+    | '/legal/retur'
+    | '/legal/termeni'
+    | '/product/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cart'
+    | '/contact'
+    | '/custom'
+    | '/despre'
+    | '/search'
+    | '/category/$slug'
+    | '/legal/anpc'
+    | '/legal/confidentialitate'
+    | '/legal/cookies'
+    | '/legal/gdpr'
+    | '/legal/livrare'
+    | '/legal/retur'
+    | '/legal/termeni'
+    | '/product/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cart'
+    | '/contact'
+    | '/custom'
+    | '/despre'
+    | '/search'
+    | '/category/$slug'
+    | '/legal/anpc'
+    | '/legal/confidentialitate'
+    | '/legal/cookies'
+    | '/legal/gdpr'
+    | '/legal/livrare'
+    | '/legal/retur'
+    | '/legal/termeni'
+    | '/product/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartRoute: typeof CartRoute
+  ContactRoute: typeof ContactRoute
+  CustomRoute: typeof CustomRoute
+  DespreRoute: typeof DespreRoute
+  SearchRoute: typeof SearchRoute
+  CategorySlugRoute: typeof CategorySlugRoute
+  LegalAnpcRoute: typeof LegalAnpcRoute
+  LegalConfidentialitateRoute: typeof LegalConfidentialitateRoute
+  LegalCookiesRoute: typeof LegalCookiesRoute
+  LegalGdprRoute: typeof LegalGdprRoute
+  LegalLivrareRoute: typeof LegalLivrareRoute
+  LegalReturRoute: typeof LegalReturRoute
+  LegalTermeniRoute: typeof LegalTermeniRoute
+  ProductSlugRoute: typeof ProductSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/despre': {
+      id: '/despre'
+      path: '/despre'
+      fullPath: '/despre'
+      preLoaderRoute: typeof DespreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom': {
+      id: '/custom'
+      path: '/custom'
+      fullPath: '/custom'
+      preLoaderRoute: typeof CustomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +269,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$slug': {
+      id: '/product/$slug'
+      path: '/product/$slug'
+      fullPath: '/product/$slug'
+      preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/termeni': {
+      id: '/legal/termeni'
+      path: '/legal/termeni'
+      fullPath: '/legal/termeni'
+      preLoaderRoute: typeof LegalTermeniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/retur': {
+      id: '/legal/retur'
+      path: '/legal/retur'
+      fullPath: '/legal/retur'
+      preLoaderRoute: typeof LegalReturRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/livrare': {
+      id: '/legal/livrare'
+      path: '/legal/livrare'
+      fullPath: '/legal/livrare'
+      preLoaderRoute: typeof LegalLivrareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/gdpr': {
+      id: '/legal/gdpr'
+      path: '/legal/gdpr'
+      fullPath: '/legal/gdpr'
+      preLoaderRoute: typeof LegalGdprRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/cookies': {
+      id: '/legal/cookies'
+      path: '/legal/cookies'
+      fullPath: '/legal/cookies'
+      preLoaderRoute: typeof LegalCookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/confidentialitate': {
+      id: '/legal/confidentialitate'
+      path: '/legal/confidentialitate'
+      fullPath: '/legal/confidentialitate'
+      preLoaderRoute: typeof LegalConfidentialitateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/anpc': {
+      id: '/legal/anpc'
+      path: '/legal/anpc'
+      fullPath: '/legal/anpc'
+      preLoaderRoute: typeof LegalAnpcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category/$slug': {
+      id: '/category/$slug'
+      path: '/category/$slug'
+      fullPath: '/category/$slug'
+      preLoaderRoute: typeof CategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartRoute: CartRoute,
+  ContactRoute: ContactRoute,
+  CustomRoute: CustomRoute,
+  DespreRoute: DespreRoute,
+  SearchRoute: SearchRoute,
+  CategorySlugRoute: CategorySlugRoute,
+  LegalAnpcRoute: LegalAnpcRoute,
+  LegalConfidentialitateRoute: LegalConfidentialitateRoute,
+  LegalCookiesRoute: LegalCookiesRoute,
+  LegalGdprRoute: LegalGdprRoute,
+  LegalLivrareRoute: LegalLivrareRoute,
+  LegalReturRoute: LegalReturRoute,
+  LegalTermeniRoute: LegalTermeniRoute,
+  ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
