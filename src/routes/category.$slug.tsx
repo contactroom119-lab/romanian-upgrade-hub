@@ -86,7 +86,7 @@ function CategoryPage() {
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {list.map((p, i) => (
+            {list.map((p: typeof PRODUCTS[number], i: number) => (
               <ProductCard key={p.slug} product={p} index={i} />
             ))}
           </div>
