@@ -1,8 +1,9 @@
 {%- comment -%}
   Announcement marquee — ports the React <Marquee /> component.
   Dark ink bar; text scrolls with a sparkle icon between items.
-  Used twice on the homepage: once (normal) above the header via theme.liquid,
-  once (reverse) after the hero via templates/index.json.
+  Addable section (presets only — never static, so it registers cleanly).
+  Used twice on the homepage via templates/index.json: once (normal) at the top,
+  once (reverse) after the hero.
 {%- endcomment -%}
 
 <div class="r119-marquee">
@@ -51,14 +52,6 @@
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "item", "settings": { "text": "MAKE SPACE FOR CHAOS" } },
-      { "type": "item", "settings": { "text": "CALM" } },
-      { "type": "item", "settings": { "text": "AND EVERYTHING IN BETWEEN" } },
-      { "type": "item", "settings": { "text": "ROOM 119 — YOUR SPACE. YOUR RULES" } }
-    ]
-  },
   "presets": [
     {
       "name": "Announcement marquee",

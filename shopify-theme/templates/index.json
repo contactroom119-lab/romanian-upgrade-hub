@@ -1,5 +1,16 @@
 {
   "sections": {
+    "marquee-top": {
+      "type": "announcement-marquee",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "MAKE SPACE FOR CHAOS" } },
+        "m2": { "type": "item", "settings": { "text": "CALM" } },
+        "m3": { "type": "item", "settings": { "text": "AND EVERYTHING IN BETWEEN" } },
+        "m4": { "type": "item", "settings": { "text": "ROOM 119 — YOUR SPACE. YOUR RULES" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"],
+      "settings": { "reverse": false }
+    },
     "hero": {
       "type": "hero",
       "blocks": {
@@ -90,6 +101,7 @@
     }
   },
   "order": [
+    "marquee-top",
     "hero",
     "marquee-reverse",
     "category-grid",

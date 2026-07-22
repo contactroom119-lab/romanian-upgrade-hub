@@ -53,11 +53,11 @@
 
     {%- comment -%}
       Global chrome, rendered on every template as static sections:
-      the top (normal) marquee, the sticky header, and the footer.
-      The homepage body — including the SECOND, reversed marquee after the
-      hero — is driven by templates/index.json.
+      the sticky header and the footer.
+      The homepage marquees (normal at the top, reversed after the hero) are
+      addable sections driven by templates/index.json, so they must NOT be
+      rendered statically here.
     {%- endcomment -%}
-    {% section 'announcement-marquee' %}
     {% section 'header' %}
 
     <main id="MainContent" role="main">
