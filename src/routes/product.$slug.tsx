@@ -3,7 +3,7 @@ import { ArrowLeft, Check, Minus, Plus, ShoppingBag, Truck, RefreshCw, Shield } 
 import { useState } from "react";
 import { PageShell } from "@/components/site/PageShell";
 import { ProductCard } from "@/components/site/ProductCard";
-import { getProduct, productsByCategory, getCategory, SIZES, SIZE_MULT, RON, PRODUCTS } from "@/lib/room119-data";
+import { getProduct, productsByCategory, getCategory, SIZE_MULT, RON, PRODUCTS, productSizes, sizeLabel, isShirt } from "@/lib/room119-data";
 import { addToCart } from "@/lib/cart-store";
 
 export const Route = createFileRoute("/product/$slug")({
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/product/$slug")({
       <section className="mx-auto max-w-[900px] px-4 py-24 text-center md:px-8">
         <div className="font-marker text-primary">404</div>
         <h1 className="font-display text-5xl md:text-7xl">Produs inexistent</h1>
-        <p className="mt-4 text-muted-foreground">Posterul ăsta s-a mutat sau nu a existat niciodată.</p>
+        <p className="mt-4 text-muted-foreground">Produsul ăsta s-a mutat sau nu a existat niciodată.</p>
         <Link to="/" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground">
           Înapoi acasă
         </Link>
@@ -43,7 +43,8 @@ export const Route = createFileRoute("/product/$slug")({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
-  const [size, setSize] = useState<(typeof SIZES)[number]>("A3");
+  const sizes = productSizes(product.type);
+  const [size, setSize] = useState<(typeof sizes)[number]>(sizes[1]);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
 
@@ -93,9 +94,9 @@ function ProductPage() {
           <p className="mt-6 max-w-lg text-muted-foreground">{product.description}</p>
 
           <div className="mt-8">
-            <div className="mb-2 text-xs font-semibold uppercase tracking-[0.2em]">Format</div>
-            <div className="flex gap-2">
-              {SIZES.map((s) => (
+            <div className="mb-2 text-xs font-semibold uppercase tracking-[0.2em]">{sizeLabel(product.type)}</div>
+            <div className="flex flex-wrap gap-2">
+              {sizes.map((s) => (
                 <button
                   key={s}
                   onClick={() => setSize(s)}
@@ -132,10 +133,21 @@ function ProductPage() {
           <details className="mt-6 rounded-xl border border-ink/10 bg-card p-4">
             <summary className="cursor-pointer font-display text-sm uppercase tracking-widest">Detalii & materiale</summary>
             <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
-              <li>· Hârtie mată premium 250 g/mp, certificată FSC</li>
-              <li>· Cerneluri pigmentate, rezistente la lumină</li>
-              <li>· Tipărit și expediat din București</li>
-              <li>· Ramă neinclusă (dar arată bine goală pe perete)</li>
+              {isShirt(product) ? (
+                <>
+                  <li>· Tricou oversized, croială relaxed fit</li>
+                  <li>· 100% bumbac premium 240 g/mp, certificat OEKO-TEX</li>
+                  <li>· Print eco-solvent, rezistent la spălări</li>
+                  <li>· Tipărit și expediat din București</li>
+                </>
+              ) : (
+                <>
+                  <li>· Hârtie mată premium 250 g/mp, certificată FSC</li>
+                  <li>· Cerneluri pigmentate, rezistente la lumină</li>
+                  <li>· Tipărit și expediat din București</li>
+                  <li>· Ramă neinclusă (dar arată bine goală pe perete)</li>
+                </>
+              )}
             </ul>
           </details>
         </div>

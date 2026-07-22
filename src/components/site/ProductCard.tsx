@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
-import { type Product, RON } from "@/lib/room119-data";
+import { type Product, RON, productSizes } from "@/lib/room119-data";
 import { addToCart } from "@/lib/cart-store";
 
 export function ProductCard({ product, index = 0, showNew = true }: { product: Product; index?: number; showNew?: boolean }) {
   const rot = index % 2 === 0 ? -1 : 1;
+  const defaultSize = productSizes(product.type)[1];
+  const typeBadge = product.type === "shirt" ? "Tricou" : "Poster";
   return (
     <div className="poster group relative flex flex-col overflow-hidden rounded-2xl bg-paper text-ink shadow-[var(--shadow-tape)]" style={{ transform: `rotate(${rot}deg)` }}>
       <Link to="/product/$slug" params={{ slug: product.slug }} className="relative block aspect-[3/4] overflow-hidden bg-muted">
@@ -20,14 +22,14 @@ export function ProductCard({ product, index = 0, showNew = true }: { product: P
           </span>
         )}
         <span className="absolute right-3 top-3 rounded-full bg-ink px-2.5 py-1 font-display text-[10px] uppercase tracking-widest text-paper">
-          No {product.no}
+          {typeBadge}
         </span>
       </Link>
       <button
         type="button"
         onClick={(e) => {
           e.preventDefault();
-          addToCart(product.slug);
+          addToCart(product.slug, defaultSize);
         }}
         className="absolute inset-x-0 bottom-[68px] translate-y-full bg-ink/95 p-3 text-center transition duration-300 group-hover:translate-y-0"
       >

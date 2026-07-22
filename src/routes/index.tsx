@@ -11,11 +11,14 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Room 119 — Art You Can Wear, Hang, Live In" },
-      { name: "description", content: "Postere, printuri și artă purtabilă din Room 119. Fă loc pentru haos, calm și tot ce e între." },
+      { name: "description", content: "Postere, tricouri și artă purtabilă din Room 119. Fă loc pentru haos, calm și tot ce e între." },
       { property: "og:image", content: "https://static.wixstatic.com/media/80218c_37a2ff7ff4e64576928c7cb745615567~mv2.png" },
     ],
   }),
 });
+
+const TRICOURI_CATEGORY = CATEGORIES.find((c) => c.slug === "tricouri")!;
+const ALL_THE_THINGS = CATEGORIES.find((c) => c.slug === "all-the-things")!;
 
 function Room119Page() {
   return (
@@ -40,10 +43,10 @@ function Room119Page() {
               ROOM<br />119.
             </h1>
             <p className="mt-6 max-w-lg text-lg text-muted-foreground md:text-xl">
-              Art you can <em className="font-marker not-italic text-foreground">wear</em>, <em className="font-marker not-italic text-foreground">hang</em>, and <em className="font-marker not-italic text-foreground">live in</em>. Postere, printuri și haos zilnic — tipărite cu grijă în România.
+              Art you can <em className="font-marker not-italic text-foreground">wear</em>, <em className="font-marker not-italic text-foreground">hang</em>, and <em className="font-marker not-italic text-foreground">live in</em>. Postere, tricouri și haos zilnic — tipărite cu grijă în România.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#categories" className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:bg-primary/90">
+              <a href="#product-types" className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:bg-primary/90">
                 Shop the Room <ArrowRight className="size-4 transition group-hover:translate-x-1" />
               </a>
               <Link to="/custom" className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-card px-6 py-3 font-semibold hover:bg-ink hover:text-paper transition">
@@ -96,7 +99,7 @@ function Room119Page() {
           </div>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
           {CATEGORIES.map((c, i) => (
             <Link
               key={c.slug}
@@ -105,7 +108,7 @@ function Room119Page() {
               className="group grainy relative flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-card shadow-[var(--shadow-tape)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-poster)]"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                <img src={c.img} alt={c.name} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+                <img src={c.img} alt={c.name} loading="lazy" width={800} height={520} className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                 <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-2 py-1 font-display text-xs text-paper backdrop-blur">
                   0{i + 1}
                 </span>
@@ -124,12 +127,96 @@ function Room119Page() {
         </div>
       </section>
 
+      {/* PRODUCT TYPES — POSTERS vs T-SHIRTS */}
+      <section id="product-types" className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="mb-2 font-marker text-sm text-primary">02 / Wear it or hang it</div>
+            <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
+              Tablouri <span className="text-primary">vs</span><br />tricouri
+            </h2>
+          </div>
+          <p className="max-w-sm text-muted-foreground">
+            Același design, două feluri de a-l trăi. Pe perete sau pe tine. Ambele tipărite în România, cu aceeași atenție la detalii.
+          </p>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2">
+          <Link
+            to="/category/$slug"
+            params={{ slug: "all-the-things" }}
+            className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-card shadow-[var(--shadow-poster)] transition hover:-translate-y-1"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden md:aspect-[16/10]">
+              <img
+                src={ALL_THE_THINGS.img}
+                alt="Tablouri"
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent" />
+            </div>
+            <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+              <div className="flex items-start justify-between">
+                <span className="rounded-full border border-paper/20 bg-paper/10 px-3 py-1 font-display text-xs uppercase tracking-widest text-paper backdrop-blur">
+                  Postere
+                </span>
+                <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground transition group-hover:rotate-45">
+                  <ArrowUpRight className="size-4" />
+                </span>
+              </div>
+              <div className="text-paper">
+                <div className="font-display text-4xl leading-[0.9] md:text-6xl">TABLOURI</div>
+                <p className="mt-2 max-w-xs text-sm text-paper/80">Hârtie mată premium, formate A4 / A3 / A2. Fă loc pe pereți.</p>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            to="/category/$slug"
+            params={{ slug: "tricouri" }}
+            className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-card shadow-[var(--shadow-poster)] transition hover:-translate-y-1"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden md:aspect-[16/10]">
+              <img
+                src={TRICOURI_CATEGORY.img}
+                alt="Tricouri"
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent" />
+            </div>
+            <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+              <div className="flex items-start justify-between">
+                <span className="rounded-full border border-paper/20 bg-paper/10 px-3 py-1 font-display text-xs uppercase tracking-widest text-paper backdrop-blur">
+                  Tricouri
+                </span>
+                <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground transition group-hover:rotate-45">
+                  <ArrowUpRight className="size-4" />
+                </span>
+              </div>
+              <div className="text-paper">
+                <div className="font-display text-4xl leading-[0.9] md:text-6xl">TRICOURI</div>
+                <p className="mt-2 max-w-xs text-sm text-paper/80">Oversized 240g, bumbac premium. Mărimi S până la XXL. Poartă camera.</p>
+              </div>
+            </div>
+          </Link>
+        </div>
+
+        {/* T-shirt teaser grid */}
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {PRODUCTS.filter((p) => p.type === "shirt").slice(0, 3).map((p, i) => (
+            <ProductCard key={p.slug} product={p} index={i} />
+          ))}
+        </div>
+      </section>
+
       {/* BESTSELLERS */}
       <section id="bestsellers" className="relative border-y border-ink/10 bg-ink text-paper">
         <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
           <div className="mb-10 flex items-end justify-between gap-6">
             <div>
-              <div className="mb-2 font-marker text-sm text-primary">02 / Best of</div>
+              <div className="mb-2 font-marker text-sm text-primary">03 / Best of</div>
               <h2 className="font-display text-5xl md:text-7xl">
                 Our best sellers — <span className="text-primary">in a blush state</span>
               </h2>
@@ -140,7 +227,7 @@ function Room119Page() {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {PRODUCTS.map((p, i) => (
+            {PRODUCTS.filter((p) => p.category === "in-a-blush-state").map((p, i) => (
               <ProductCard key={p.slug} product={p} index={i} />
             ))}
           </div>
@@ -151,7 +238,7 @@ function Room119Page() {
       <section className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <div className="mb-2 font-marker text-sm text-primary">03 / Loud & quiet</div>
+            <div className="mb-2 font-marker text-sm text-primary">04 / Loud & quiet</div>
             <h2 className="font-display text-5xl md:text-7xl">
               Our best sellers — <span className="text-primary">monochrome</span>
             </h2>
@@ -179,11 +266,12 @@ function Room119Page() {
                 </div>
               </div>
             </Link>
-            <Link to="/category/$slug" params={{ slug: "all-the-things" }} className="grainy group relative overflow-hidden rounded-2xl bg-card border border-ink/10">
+            <Link to="/category/$slug" params={{ slug: "tricouri" }} className="grainy group relative overflow-hidden rounded-2xl bg-card border border-ink/10">
+              <img src={TRICOURI_CATEGORY.img} alt="Tricouri" className="h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 grid place-items-center p-6 text-center">
                 <div>
-                  <div className="font-marker text-sm text-primary">Everything else</div>
-                  <div className="font-display text-3xl leading-none">ALL THE THINGS →</div>
+                  <div className="font-marker text-sm text-primary">Wear the room</div>
+                  <div className="font-display text-3xl leading-none text-foreground">TRICOURI →</div>
                 </div>
               </div>
             </Link>
@@ -197,7 +285,7 @@ function Room119Page() {
              style={{ backgroundImage: "radial-gradient(circle at 20% 20%, oklch(1 0 0 / 0.4) 0, transparent 40%), radial-gradient(circle at 80% 60%, oklch(0 0 0 / 0.3) 0, transparent 45%)" }} />
         <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-24 md:grid-cols-[1.4fr_1fr] md:px-8 md:py-32">
           <div>
-            <div className="mb-4 font-marker text-sm">04 / Made for you</div>
+            <div className="mb-4 font-marker text-sm">05 / Made for you</div>
             <h2 className="font-display text-5xl leading-[0.9] md:text-8xl">
               Nu găsești exact<br />
               ce <em className="font-marker not-italic">cauți?</em>

@@ -3,13 +3,13 @@ import { Minus, Plus, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
 import { useState } from "react";
 import { PageShell } from "@/components/site/PageShell";
 import { useCart, updateQty, removeLine, cartTotals, linePrice, clearCart } from "@/lib/cart-store";
-import { getProduct, RON, SIZE_MULT } from "@/lib/room119-data";
+import { getProduct, RON, sizeLabel } from "@/lib/room119-data";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
       { title: "Coșul tău — Room 119" },
-      { name: "description", content: "Verifică ce ai în coș și finalizează comanda de postere Room 119." },
+      { name: "description", content: "Verifică ce ai în coș și finalizează comanda de postere și tricouri Room 119." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -27,7 +27,7 @@ function CartPage() {
         <section className="mx-auto max-w-[720px] px-4 py-24 text-center md:px-8">
           <div className="font-marker text-primary">→ mulțumim!</div>
           <h1 className="font-display text-5xl md:text-7xl">Comandă plasată.</h1>
-          <p className="mt-4 text-muted-foreground">Îți trimitem un email de confirmare cu detaliile expedierii. Posterele pleacă în 24–48h.</p>
+          <p className="mt-4 text-muted-foreground">Îți trimitem un email de confirmare cu detaliile expedierii. Coletul pleacă în 24–48h.</p>
           <div className="mt-8 flex justify-center gap-3">
             <Link to="/" className="rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground">Acasă</Link>
             <Link to="/contact" className="rounded-full border border-ink/20 bg-card px-6 py-3 font-semibold">Contact</Link>
@@ -71,7 +71,7 @@ function CartPage() {
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <Link to="/product/$slug" params={{ slug: p.slug }} className="font-display text-xl leading-tight hover:text-primary">{p.name}</Link>
-                          <div className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">Format {l.size}</div>
+                          <div className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">{sizeLabel(p.type)} {l.size}</div>
                         </div>
                         <button onClick={() => removeLine(l.slug, l.size)} className="rounded-full p-2 text-muted-foreground hover:bg-muted hover:text-primary" aria-label="Șterge">
                           <Trash2 className="size-4" />
@@ -85,7 +85,7 @@ function CartPage() {
                         </div>
                         <div className="text-right">
                           <div className="font-display text-lg">{RON(linePrice(l, p))}</div>
-                          <div className="text-xs text-muted-foreground">{RON(p.price * SIZE_MULT[l.size])} × {l.qty}</div>
+                          <div className="text-xs text-muted-foreground">{RON(p.price)} × {l.qty}</div>
                         </div>
                       </div>
                     </div>
