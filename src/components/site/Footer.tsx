@@ -5,43 +5,46 @@ import { Mail, Phone, MapPin, Clock, Instagram, Music2, CreditCard, Truck, Shiel
 
 export function Footer({ compact = false }: { compact?: boolean }) {
   return (
-    <section id="footer" className="relative overflow-hidden bg-ink text-paper">
-      <div className="tv-frame">
-        <video
-          src={FOOTER_VIDEO}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="crt-overlay" />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/25 to-ink/95" />
-
+    <section id="footer" className="relative bg-ink text-paper">
       {!compact && (
-        <div className="relative mx-auto max-w-[1400px] px-4 py-24 text-center md:px-8 md:py-32">
-          <div className="mb-4 font-marker text-primary">→ the closing credits</div>
-          <h2 className="font-display text-5xl leading-[0.9] md:text-[8rem]">
-            YOU FOUND<br />
-            THE ROOM.<br />
-            <span className="text-primary">NOW, MAKE IT YOURS.</span>
-          </h2>
-
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mx-auto mt-12 flex max-w-md items-center gap-2 rounded-full border border-paper/20 bg-paper/10 p-2 backdrop-blur"
-          >
-            <input
-              type="email"
-              required
-              placeholder="your@email.com — join the drops"
-              className="flex-1 bg-transparent px-4 py-2 text-sm outline-none placeholder:text-paper/50"
+        <div className="relative overflow-hidden">
+          <div className="tv-frame">
+            <video
+              src={FOOTER_VIDEO}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
             />
-            <button className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
-              Sign me up
-            </button>
-          </form>
+            <div className="crt-overlay" />
+          </div>
+          {/* Keep video crisp at top, fade smoothly into ink toward the trust strip */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ink/25 to-ink" />
+
+          <div className="relative mx-auto max-w-[1400px] px-4 py-24 text-center md:px-8 md:py-32">
+            <div className="mb-4 font-marker text-primary">→ the closing credits</div>
+            <h2 className="font-display text-5xl leading-[0.9] md:text-[8rem]">
+              YOU FOUND<br />
+              THE ROOM.<br />
+              <span className="text-primary">NOW, MAKE IT YOURS.</span>
+            </h2>
+
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="mx-auto mt-12 flex max-w-md items-center gap-2 rounded-full border border-paper/20 bg-ink/40 p-2 backdrop-blur"
+            >
+              <input
+                type="email"
+                required
+                placeholder="your@email.com — join the drops"
+                className="flex-1 bg-transparent px-4 py-2 text-sm outline-none placeholder:text-paper/50"
+              />
+              <button className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
+                Sign me up
+              </button>
+            </form>
+          </div>
         </div>
       )}
 

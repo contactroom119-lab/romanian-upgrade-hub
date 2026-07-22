@@ -88,236 +88,236 @@ function Room119Page() {
 
       <Marquee reverse />
 
-      {/* CATEGORIES */}
-      <section id="categories" className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
-        <div className="mb-10 flex items-end justify-between gap-6">
+      {/* CATEGORIES — editorial, restrained, orange only on numerals & hover accents */}
+      <section id="categories" className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+        <div className="mb-14 grid gap-6 md:grid-cols-[1.2fr_1fr] md:items-end">
           <div>
-            <div className="mb-2 font-marker text-sm text-primary">01 / Shop by</div>
-            <h2 className="font-display text-5xl md:text-7xl">
-              Shop by <span className="text-primary">cattegory</span>
+            <div className="mb-3 font-marker text-sm text-primary">Index / 01 — Shop by</div>
+            <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
+              Four rooms.<br />
+              One <span className="text-primary italic">signature</span>.
             </h2>
           </div>
+          <p className="text-muted-foreground md:text-right md:pl-10">
+            Fiecare categorie e o dispoziție. Alege camera care ți se potrivește astăzi — postere, printuri, artă purtabilă.
+          </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-          {CATEGORIES.map((c, i) => (
+        <div className="grid divide-y divide-ink/10 border-y border-ink/10 md:grid-cols-2 md:divide-y-0 md:divide-x">
+          {CATEGORIES.filter((c) => c.slug !== "tricouri").map((c, i) => (
             <Link
               key={c.slug}
               to="/category/$slug"
               params={{ slug: c.slug }}
-              className="group grainy relative flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-card shadow-[var(--shadow-tape)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-poster)]"
+              className="group relative grid grid-cols-[auto_1fr_auto] items-center gap-6 px-2 py-8 transition hover:bg-card md:px-8"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                <img src={c.img} alt={c.name} loading="lazy" width={800} height={520} className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
-                <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-2 py-1 font-display text-xs text-paper backdrop-blur">
-                  0{i + 1}
-                </span>
+              <div className="font-display text-3xl text-primary tabular-nums">
+                {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="flex items-end justify-between gap-3 p-5">
-                <div>
-                  <div className="font-display text-2xl leading-none">{c.name.toUpperCase()}</div>
-                  <div className="mt-1 font-marker text-sm text-muted-foreground">{c.tagline}</div>
-                </div>
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition group-hover:rotate-45">
-                  <ArrowUpRight className="size-4" />
-                </span>
+              <div>
+                <div className="font-display text-2xl uppercase tracking-tight md:text-3xl">{c.name}</div>
+                <div className="mt-1 font-marker text-sm text-muted-foreground">{c.tagline}</div>
               </div>
+              <div className="relative aspect-square w-20 shrink-0 overflow-hidden rounded-xl border border-ink/10 bg-muted md:w-24">
+                <img src={c.img} alt={c.name} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-110" />
+              </div>
+              <ArrowUpRight className="absolute right-3 top-3 size-4 text-muted-foreground opacity-0 transition group-hover:opacity-100 group-hover:text-primary md:right-6 md:top-6" />
             </Link>
           ))}
         </div>
       </section>
 
-      {/* PRODUCT TYPES — POSTERS vs T-SHIRTS */}
-      <section id="product-types" className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
-        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="mb-2 font-marker text-sm text-primary">02 / Wear it or hang it</div>
-            <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
-              Tablouri <span className="text-primary">vs</span><br />tricouri
-            </h2>
+      {/* EDITORIAL FEATURE — bestsellers as a considered spread */}
+      <section id="featured" className="border-t border-ink/10">
+        <div className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+          <div className="mb-14 flex flex-col gap-3">
+            <div className="font-marker text-sm text-primary">Index / 02 — Currently on rotation</div>
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
+                The <span className="text-primary italic">quiet</span> bestsellers.
+              </h2>
+              <Link
+                to="/category/$slug"
+                params={{ slug: "in-a-blush-state" }}
+                className="link-reveal inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.25em] text-foreground md:self-auto"
+              >
+                See the full catalogue <ArrowUpRight className="size-4 text-primary" />
+              </Link>
+            </div>
           </div>
-          <p className="max-w-sm text-muted-foreground">
-            Același design, două feluri de a-l trăi. Pe perete sau pe tine. Ambele tipărite în România, cu aceeași atenție la detalii.
-          </p>
-        </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
-          <Link
-            to="/category/$slug"
-            params={{ slug: "all-the-things" }}
-            className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-card shadow-[var(--shadow-poster)] transition hover:-translate-y-1"
-          >
-            <div className="relative aspect-[4/3] overflow-hidden md:aspect-[16/10]">
-              <img
-                src={ALL_THE_THINGS.img}
-                alt="Tablouri"
-                loading="lazy"
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent" />
-            </div>
-            <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-              <div className="flex items-start justify-between">
-                <span className="rounded-full border border-paper/20 bg-paper/10 px-3 py-1 font-display text-xs uppercase tracking-widest text-paper backdrop-blur">
-                  Postere
-                </span>
-                <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground transition group-hover:rotate-45">
-                  <ArrowUpRight className="size-4" />
-                </span>
-              </div>
-              <div className="text-paper">
-                <div className="font-display text-4xl leading-[0.9] md:text-6xl">TABLOURI</div>
-                <p className="mt-2 max-w-xs text-sm text-paper/80">Hârtie mată premium, formate A4 / A3 / A2. Fă loc pe pereți.</p>
-              </div>
-            </div>
-          </Link>
-
-          <Link
-            to="/category/$slug"
-            params={{ slug: "tricouri" }}
-            className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-card shadow-[var(--shadow-poster)] transition hover:-translate-y-1"
-          >
-            <div className="relative aspect-[4/3] overflow-hidden md:aspect-[16/10]">
-              <img
-                src={TRICOURI_CATEGORY.img}
-                alt="Tricouri"
-                loading="lazy"
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent" />
-            </div>
-            <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-              <div className="flex items-start justify-between">
-                <span className="rounded-full border border-paper/20 bg-paper/10 px-3 py-1 font-display text-xs uppercase tracking-widest text-paper backdrop-blur">
-                  Tricouri
-                </span>
-                <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground transition group-hover:rotate-45">
-                  <ArrowUpRight className="size-4" />
-                </span>
-              </div>
-              <div className="text-paper">
-                <div className="font-display text-4xl leading-[0.9] md:text-6xl">TRICOURI</div>
-                <p className="mt-2 max-w-xs text-sm text-paper/80">Oversized 240g, bumbac premium. Mărimi S până la XXL. Poartă camera.</p>
-              </div>
-            </div>
-          </Link>
-        </div>
-
-        {/* T-shirt teaser grid */}
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {PRODUCTS.filter((p) => p.type === "shirt").slice(0, 3).map((p, i) => (
-            <ProductCard key={p.slug} product={p} index={i} />
-          ))}
+          <div className="grid gap-8 md:grid-cols-12">
+            {(() => {
+              const list = PRODUCTS.filter((p) => p.category === "in-a-blush-state").slice(0, 4);
+              const [hero, ...rest] = list;
+              return (
+                <>
+                  {hero && (
+                    <Link
+                      to="/product/$slug"
+                      params={{ slug: hero.slug }}
+                      className="group relative col-span-12 md:col-span-7"
+                    >
+                      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-muted md:aspect-[5/6]">
+                        <img src={hero.img} alt={hero.name} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" />
+                      </div>
+                      <div className="mt-4 flex items-end justify-between gap-6">
+                        <div>
+                          <div className="font-marker text-xs text-primary">Nº {String(hero.no).padStart(3, "0")}</div>
+                          <div className="font-display text-2xl uppercase tracking-tight md:text-3xl">{hero.name}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs uppercase tracking-widest text-muted-foreground">from</div>
+                          <div className="font-display text-2xl">{hero.price} <span className="text-sm text-muted-foreground">RON</span></div>
+                        </div>
+                      </div>
+                    </Link>
+                  )}
+                  <div className="col-span-12 grid gap-8 md:col-span-5 md:content-start">
+                    {rest.map((p, i) => (
+                      <Link
+                        key={p.slug}
+                        to="/product/$slug"
+                        params={{ slug: p.slug }}
+                        className="group grid grid-cols-[7rem_1fr] gap-5 border-b border-ink/10 pb-6 last:border-b-0 last:pb-0"
+                      >
+                        <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+                          <img src={p.img} alt={p.name} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                        </div>
+                        <div className="flex flex-col justify-between py-1">
+                          <div>
+                            <div className="font-marker text-[11px] text-primary">Nº {String(p.no).padStart(3, "0")} · {String(i + 2).padStart(2, "0")}</div>
+                            <div className="font-display text-lg uppercase leading-tight tracking-tight">{p.name}</div>
+                          </div>
+                          <div className="flex items-center justify-between text-xs uppercase tracking-widest text-muted-foreground">
+                            <span>{p.category.replace(/-/g, " ")}</span>
+                            <span className="text-foreground">{p.price} <span className="text-muted-foreground">RON</span></span>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              );
+            })()}
+          </div>
         </div>
       </section>
 
-      {/* BESTSELLERS */}
-      <section id="bestsellers" className="relative border-y border-ink/10 bg-ink text-paper">
-        <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
-          <div className="mb-10 flex items-end justify-between gap-6">
+      {/* WEAR IT / HANG IT — split editorial, no full-color blocks */}
+      <section className="border-t border-ink/10 bg-card">
+        <div className="mx-auto grid max-w-[1400px] gap-14 px-4 py-24 md:grid-cols-2 md:gap-16 md:px-8 md:py-32">
+          <div className="flex flex-col">
+            <div className="mb-3 font-marker text-sm text-primary">Index / 03 — Format</div>
+            <h3 className="font-display text-4xl uppercase leading-[0.9] md:text-6xl">Hang it.</h3>
+            <p className="mt-4 max-w-sm text-muted-foreground">
+              Postere pe hârtie mată premium, format A4 · A3 · A2. Ambalate în tuburi rigide, expediate din România.
+            </p>
+            <div className="relative mt-8 aspect-[4/5] overflow-hidden rounded-sm bg-muted">
+              <img src={ALL_THE_THINGS.img} alt="Tablouri" loading="lazy" className="h-full w-full object-cover" />
+            </div>
+            <Link
+              to="/category/$slug"
+              params={{ slug: "all-the-things" }}
+              className="mt-6 inline-flex items-center gap-2 self-start border-b border-primary pb-1 font-display text-sm uppercase tracking-[0.25em] text-foreground transition hover:text-primary"
+            >
+              Vezi posterele <ArrowUpRight className="size-4 text-primary" />
+            </Link>
+          </div>
+
+          <div className="flex flex-col md:mt-24">
+            <div className="mb-3 font-marker text-sm text-primary">Index / 04 — Format</div>
+            <h3 className="font-display text-4xl uppercase leading-[0.9] md:text-6xl">Wear it.</h3>
+            <p className="mt-4 max-w-sm text-muted-foreground">
+              Tricouri oversized 240g, bumbac premium, S–XXL. Aceleași designuri, dar pe tine.
+            </p>
+            <div className="relative mt-8 aspect-[4/5] overflow-hidden rounded-sm bg-muted">
+              <img src={TRICOURI_CATEGORY.img} alt="Tricouri" loading="lazy" className="h-full w-full object-cover" />
+            </div>
+            <Link
+              to="/category/$slug"
+              params={{ slug: "tricouri" }}
+              className="mt-6 inline-flex items-center gap-2 self-start border-b border-primary pb-1 font-display text-sm uppercase tracking-[0.25em] text-foreground transition hover:text-primary"
+            >
+              Vezi tricourile <ArrowUpRight className="size-4 text-primary" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* MONOCHROME — the house classics, on paper */}
+      <section className="border-t border-ink/10">
+        <div className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="mb-2 font-marker text-sm text-primary">03 / Best of</div>
-              <h2 className="font-display text-5xl md:text-7xl">
-                Our best sellers — <span className="text-primary">in a blush state</span>
+              <div className="mb-3 font-marker text-sm text-primary">Index / 05 — House classics</div>
+              <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
+                Black. White.<br /><span className="text-primary italic">Loud.</span>
               </h2>
             </div>
-            <Link to="/category/$slug" params={{ slug: "in-a-blush-state" }} className="link-reveal hidden items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] md:inline-flex">
-              View all <ArrowUpRight className="size-4" />
+            <Link
+              to="/category/$slug"
+              params={{ slug: "monochrome" }}
+              className="link-reveal inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.25em] md:self-auto"
+            >
+              Toate monochrome <ArrowUpRight className="size-4 text-primary" />
             </Link>
           </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {PRODUCTS.filter((p) => p.category === "in-a-blush-state").map((p, i) => (
+          <div className="grid gap-4 md:grid-cols-4">
+            {PRODUCTS.filter((p) => p.category === "monochrome").slice(0, 4).map((p, i) => (
               <ProductCard key={p.slug} product={p} index={i} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* MONOCHROME TEASER */}
-      <section className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <div>
-            <div className="mb-2 font-marker text-sm text-primary">04 / Loud & quiet</div>
-            <h2 className="font-display text-5xl md:text-7xl">
-              Our best sellers — <span className="text-primary">monochrome</span>
+      {/* CUSTOM CTA — editorial split, no full orange section */}
+      <section id="custom" className="border-t border-ink/10 bg-card">
+        <div className="mx-auto grid max-w-[1400px] gap-14 px-4 py-24 md:grid-cols-[1.3fr_1fr] md:gap-20 md:px-8 md:py-32">
+          <div className="flex flex-col justify-center">
+            <div className="mb-3 font-marker text-sm text-primary">Index / 06 — Made for you</div>
+            <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
+              Nu găsești exact<br />ce <span className="text-primary italic">cauți?</span>
             </h2>
+            <p className="mt-6 max-w-lg text-muted-foreground md:text-lg">
+              Un poster pe care l-ai purta pe tricou? Un design mutat pe tote? Îl adaptez, îl mut sau creez ceva complet nou. Room 119 e despre a face spații (și ținute) să te semene.
+            </p>
+            <Link
+              to="/custom"
+              className="mt-8 inline-flex items-center gap-3 self-start rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:bg-primary/90"
+            >
+              Trimite mesaj <ArrowRight className="size-4" />
+            </Link>
           </div>
-          <Link to="/category/$slug" params={{ slug: "monochrome" }} className="link-reveal hidden items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] md:inline-flex">
-            View all <ArrowUpRight className="size-4" />
-          </Link>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          <Link to="/category/$slug" params={{ slug: "monochrome" }} className="grainy group relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl bg-ink">
-            <img src={CATEGORIES[0].img} alt="Monochrome" className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-ink/70 via-ink/20 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-8">
-              <div className="font-marker text-sm text-primary">The house classics</div>
-              <div className="font-display text-4xl text-paper md:text-6xl">BLACK. WHITE. LOUD.</div>
+
+          <div className="relative">
+            <div className="rounded-sm border border-ink/10 bg-background p-6 shadow-[var(--shadow-tape)]">
+              <div className="flex items-center justify-between border-b border-dashed border-ink/20 pb-3 font-marker text-sm text-primary">
+                <span>room119 // custom order</span>
+                <span>Nº {new Date().getFullYear()}</span>
+              </div>
+              <ul className="mt-5 space-y-4 text-sm">
+                {[
+                  "Zi-mi design-ul + obiectul (poster, tricou, hoodie, tote…)",
+                  "Îți fac mockup, aprobi",
+                  "Tipărit & expediat din România",
+                ].map((t, i) => (
+                  <li key={t} className="grid grid-cols-[2rem_1fr] items-start gap-3">
+                    <span className="font-display text-lg text-primary tabular-nums">0{i + 1}</span>
+                    <span className="text-foreground/90">{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex items-center justify-between border-t border-dashed border-ink/20 pt-4 text-xs uppercase tracking-widest text-muted-foreground">
+                <Sparkles className="size-4 text-primary" />
+                <span>hand-made · România</span>
+                <Sparkles className="size-4 text-primary" />
+              </div>
             </div>
-          </Link>
-          <div className="grid grid-rows-2 gap-4">
-            <Link to="/category/$slug" params={{ slug: "red-flags-only" }} className="grainy group relative overflow-hidden rounded-2xl bg-primary">
-              <img src={CATEGORIES[2].img} alt="Red Flags" className="h-full w-full object-cover opacity-70 mix-blend-multiply transition duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 grid place-items-center">
-                <div className="text-center text-primary-foreground">
-                  <div className="font-marker text-sm">Category</div>
-                  <div className="font-display text-3xl">RED FLAGS ONLY</div>
-                </div>
-              </div>
-            </Link>
-            <Link to="/category/$slug" params={{ slug: "tricouri" }} className="grainy group relative overflow-hidden rounded-2xl bg-card border border-ink/10">
-              <img src={TRICOURI_CATEGORY.img} alt="Tricouri" className="h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 grid place-items-center p-6 text-center">
-                <div>
-                  <div className="font-marker text-sm text-primary">Wear the room</div>
-                  <div className="font-display text-3xl leading-none text-foreground">TRICOURI →</div>
-                </div>
-              </div>
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* CUSTOM CTA */}
-      <section id="custom" className="relative overflow-hidden bg-primary text-primary-foreground">
-        <div className="pointer-events-none absolute inset-0 opacity-20"
-             style={{ backgroundImage: "radial-gradient(circle at 20% 20%, oklch(1 0 0 / 0.4) 0, transparent 40%), radial-gradient(circle at 80% 60%, oklch(0 0 0 / 0.3) 0, transparent 45%)" }} />
-        <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-24 md:grid-cols-[1.4fr_1fr] md:px-8 md:py-32">
-          <div>
-            <div className="mb-4 font-marker text-sm">05 / Made for you</div>
-            <h2 className="font-display text-5xl leading-[0.9] md:text-8xl">
-              Nu găsești exact<br />
-              ce <em className="font-marker not-italic">cauți?</em>
-            </h2>
-            <p className="mt-8 max-w-xl text-lg opacity-90">
-              Sau poate ai văzut un poster pe care l-ai purta pe tricou? Sunt la un mesaj distanță. Adaptez un design, îl mut pe altceva sau creez ceva complet nou. Room 119 e despre a face spații (și ținute) să te semene.
-            </p>
-            <Link to="/custom" className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 font-semibold text-paper transition hover:bg-paper hover:text-ink">
-              Trimite mesaj <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="relative">
-            <div className="absolute -right-8 -top-8 hidden aspect-square w-64 rotate-12 rounded-3xl border-2 border-primary-foreground/40 md:block" />
-            <div className="relative rotate-[-3deg] rounded-3xl bg-card p-6 text-ink shadow-[var(--shadow-poster)]">
-              <div className="font-marker text-sm text-primary">room119 // custom order</div>
-              <ul className="mt-4 space-y-3 text-sm">
-                {["Zi-mi design-ul + obiectul (poster, tricou, hoodie, tote…)", "Îți fac mockup, aprobi", "Tipărit & expediat din România"].map((t, i) => (
-                  <li key={t} className="flex gap-3">
-                    <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary font-display text-xs text-primary-foreground">
-                      {i + 1}
-                    </span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 border-t border-dashed border-ink/30 pt-4 font-marker text-primary">
-                ✂ - - - - - - - - - - - - - - - - - -
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>
