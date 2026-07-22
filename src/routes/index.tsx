@@ -310,7 +310,7 @@ function Room119Page() {
       <section id="custom" className="border-t border-ink/10 bg-card">
         <div className="mx-auto grid max-w-[1400px] gap-14 px-4 py-24 md:grid-cols-[1.3fr_1fr] md:gap-20 md:px-8 md:py-32">
           <div className="flex flex-col justify-center">
-            <div className="mb-3 font-marker text-sm text-primary">Index / 06 — Made for you</div>
+            <div className="mb-3 font-marker text-sm text-primary">Index / 07 — Made for you</div>
             <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
               Nu găsești exact<br />ce <span className="text-primary italic">cauți?</span>
             </h2>
