@@ -79,15 +79,15 @@ export function Footer({ compact = false }: { compact?: boolean }) {
             <ul className="mt-6 space-y-3 text-sm text-paper/80">
               <li className="flex items-start gap-2">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <a href="mailto:hello@room119.ro" className="link-reveal">hello@room119.ro</a>
+                <a href="mailto:contact.room119@gmail.com" className="link-reveal">contact.room119@gmail.com</a>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <a href="tel:+40770000000" className="link-reveal">+40 770 000 000</a>
+                <a href="tel:0722292632" className="link-reveal">0722 292 632</a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span>Str. Exemplu 119, Sector 1, București, România</span>
+                <span>Online shop · sediul în București, România</span>
               </li>
               <li className="flex items-start gap-2">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -96,10 +96,10 @@ export function Footer({ compact = false }: { compact?: boolean }) {
             </ul>
 
             <div className="mt-6 flex gap-3">
-              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="rounded-full border border-paper/20 bg-paper/5 p-2 transition hover:bg-primary hover:text-primary-foreground">
+              <a href="https://www.instagram.com/room119.studio/" target="_blank" rel="noreferrer" aria-label="Instagram" className="rounded-full border border-paper/20 bg-paper/5 p-2 transition hover:bg-primary hover:text-primary-foreground">
                 <Instagram className="h-4 w-4" />
               </a>
-              <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok" className="rounded-full border border-paper/20 bg-paper/5 p-2 transition hover:bg-primary hover:text-primary-foreground">
+              <a href="https://www.tiktok.com/@room119606?_r=1&_t=ZN-98Fd1gvF4cw" target="_blank" rel="noreferrer" aria-label="TikTok" className="rounded-full border border-paper/20 bg-paper/5 p-2 transition hover:bg-primary hover:text-primary-foreground">
                 <Music2 className="h-4 w-4" />
               </a>
             </div>
@@ -142,15 +142,12 @@ export function Footer({ compact = false }: { compact?: boolean }) {
             </ul>
           </div>
 
-          {/* Company card */}
+          {/* Legal / trust badges */}
           <div className="md:col-span-2">
-            <div className="mb-3 font-display text-sm uppercase tracking-[0.2em] text-paper/60">Compania</div>
+            <div className="mb-3 font-display text-sm uppercase tracking-[0.2em] text-paper/60">Siguranță</div>
             <div className="rounded-xl border border-paper/15 bg-paper/5 p-4 text-xs leading-relaxed text-paper/75">
-              <div className="font-semibold text-paper">Room 119 SRL</div>
-              <div>CUI: RO000000</div>
-              <div>Reg. Com.: J40/000/2024</div>
-              <div>IBAN: RO00 BTRL 0000 0000 0000 0000</div>
-              <div className="mt-2">Capital social: 1.000 RON</div>
+              <div className="font-semibold text-paper">Protecția consumatorului</div>
+              <p className="mt-1">Drepturi complete conform OUG 34/2014. Dacă ai o problemă, scrie-ne mai întâi la contact.room119@gmail.com.</p>
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-widest text-paper/60">
               <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noreferrer" className="rounded-md border border-paper/20 bg-paper/5 px-2 py-1 hover:bg-primary hover:text-primary-foreground">ANPC · SAL</a>
@@ -162,7 +159,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
         {/* Bottom bar */}
         <div className="border-t border-paper/10">
           <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-4 px-4 py-6 text-[11px] uppercase tracking-[0.2em] text-paper/60 md:flex-row md:px-8">
-            <div>© {new Date().getFullYear()} Room 119 SRL · Toate drepturile rezervate</div>
+            <div>© {new Date().getFullYear()} Room 119 · Toate drepturile rezervate</div>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link to="/legal/termeni" className="link-reveal">Termeni</Link>
               <Link to="/legal/confidentialitate" className="link-reveal">Confidențialitate</Link>
@@ -170,7 +167,9 @@ export function Footer({ compact = false }: { compact?: boolean }) {
               <Link to="/legal/gdpr" className="link-reveal">GDPR</Link>
               <Link to="/legal/anpc" className="link-reveal">ANPC</Link>
             </div>
-            <div className="text-paper/50">Made with <span className="text-primary">♥</span> în București</div>
+            <a href="https://www.vectordevelopers.com/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-paper/50 transition hover:text-primary">
+              Made with <Heart className="h-3 w-3 fill-current text-primary" /> by <span className="font-semibold">Vector Developers</span>
+            </a>
           </div>
         </div>
       </div>
