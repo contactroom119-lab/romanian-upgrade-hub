@@ -10,14 +10,12 @@ export const Route = createFileRoute("/legal/gdpr")({
   }),
   component: () => (
     <LegalLayout eyebrow="drepturi GDPR" title="GDPR" updated="ianuarie 2026">
-      <p>Room 119 SRL este operator de date cu caracter personal conform Regulamentului (UE) 2016/679.</p>
+      <p>Room 119 este operator de date cu caracter personal conform Regulamentului (UE) 2016/679.</p>
 
       <h2>Datele operatorului</h2>
       <ul>
-        <li>Denumire: Room 119 SRL</li>
-        <li>CUI: RO000000</li>
-        <li>Reg. com.: J40/000/2024</li>
-        <li>Email GDPR: <a href="mailto:privacy@room119.ro">privacy@room119.ro</a></li>
+        <li>Denumire: Room 119</li>
+        <li>Email GDPR: <a href="mailto:contact.room119@gmail.com">contact.room119@gmail.com</a></li>
       </ul>
 
       <h2>Drepturile persoanei vizate</h2>
@@ -33,7 +31,7 @@ export const Route = createFileRoute("/legal/gdpr")({
       </ul>
 
       <h2>Cum exerciți drepturile</h2>
-      <p>Trimite o cerere scrisă la <a href="mailto:privacy@room119.ro">privacy@room119.ro</a>. Vei primi răspuns în cel mult 30 de zile.</p>
+      <p>Trimite o cerere scrisă la <a href="mailto:contact.room119@gmail.com">contact.room119@gmail.com</a>. Vei primi răspuns în cel mult 30 de zile.</p>
 
       <h2>Plângeri</h2>
       <p>Poți depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (<a href="https://www.dataprotection.ro" target="_blank" rel="noreferrer">dataprotection.ro</a>).</p>

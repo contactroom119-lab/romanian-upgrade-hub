@@ -34,7 +34,7 @@ export const Route = createFileRoute("/legal/livrare")({
       <p>Lucrăm cu FanCourier, Sameday și Cargus, în funcție de destinație. Vei primi codul AWB pe email.</p>
 
       <h2>Coletul întârzie sau ajunge deteriorat?</h2>
-      <p>Scrie-ne la <a href="mailto:hello@room119.ro">hello@room119.ro</a> cu numărul comenzii și, dacă e cazul, poze. Rezolvăm rapid.</p>
+      <p>Scrie-ne la <a href="mailto:contact.room119@gmail.com">contact.room119@gmail.com</a> cu numărul comenzii și, dacă e cazul, poze. Rezolvăm rapid.</p>
     </LegalLayout>
   ),
 });

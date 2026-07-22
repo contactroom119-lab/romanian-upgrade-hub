@@ -11,7 +11,7 @@ export const Route = createFileRoute("/legal/termeni")({
   component: () => (
     <LegalLayout eyebrow="legal" title="Termeni și condiții" updated="ianuarie 2026">
       <h2>1. Cine suntem</h2>
-      <p>Site-ul room119.ro este operat de <strong>Room 119 SRL</strong>, CUI RO000000, J40/000/2024, cu sediul în București, România. Datele de contact sunt disponibile în pagina <a href="/contact">Contact</a>.</p>
+      <p>Site-ul room119.ro este operat de <strong>Room 119</strong>, un online shop cu sediul în București, România. Datele de contact sunt disponibile în pagina <a href="/contact">Contact</a>.</p>
 
       <h2>2. Acceptarea termenilor</h2>
       <p>Prin utilizarea site-ului și plasarea unei comenzi confirmi că ai citit, ai înțeles și ești de acord cu acești termeni. Dacă nu ești de acord, te rugăm să nu utilizezi site-ul.</p>

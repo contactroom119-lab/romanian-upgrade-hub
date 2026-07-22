@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { FOOTER_VIDEO } from "@/lib/room119-data";
-import { Mail, Phone, MapPin, Clock, Instagram, Music2, CreditCard, Truck, ShieldCheck, RotateCcw } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Instagram, Music2, CreditCard, Truck, ShieldCheck, RotateCcw, Heart } from "lucide-react";
+
 
 export function Footer({ compact = false }: { compact?: boolean }) {
   return (
