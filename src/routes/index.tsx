@@ -127,75 +127,31 @@ function Room119Page() {
         </div>
       </section>
 
-      {/* EDITORIAL FEATURE — bestsellers on dark, magazine spread */}
+      {/* BESTSELLERS — dark poster grid */}
       <section id="featured" className="relative border-t border-ink/10 bg-ink text-paper">
         <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-screen" style={{ backgroundImage: "var(--grain)" }} />
         <div className="relative mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="mb-3 font-marker text-sm text-primary">Index / 02 — Currently on rotation</div>
-              <h2 className="font-display text-5xl leading-[0.9] md:text-7xl">
-                The <span className="text-primary italic">quiet</span><br />bestsellers.
+              <div className="mb-4 font-marker text-sm text-primary">02 / Best of</div>
+              <h2 className="font-display text-5xl leading-[0.9] md:text-8xl">
+                Our best sellers — <span className="text-primary italic">in a blush state</span>
               </h2>
             </div>
             <Link
               to="/category/$slug"
               params={{ slug: "in-a-blush-state" }}
-              className="group inline-flex items-center gap-3 self-start border border-paper/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-paper transition hover:bg-primary hover:border-primary hover:text-primary-foreground md:self-auto"
+              className="group inline-flex shrink-0 items-center gap-2 self-start font-display text-sm uppercase tracking-[0.25em] text-paper transition hover:text-primary md:self-end"
             >
-              See full catalogue <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              View all <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
 
-          {(() => {
-            const list = PRODUCTS.filter((p) => p.category === "in-a-blush-state").slice(0, 4);
-            const [hero, ...rest] = list;
-            return (
-              <div className="grid gap-10 md:grid-cols-12 md:gap-12">
-                {hero && (
-                  <Link
-                    to="/product/$slug"
-                    params={{ slug: hero.slug }}
-                    className="group relative col-span-12 md:col-span-8"
-                  >
-                    <div className="relative aspect-[5/6] overflow-hidden bg-paper/5">
-                      <img src={hero.img} alt={hero.name} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" />
-                      <div className="absolute left-4 top-4 rounded-full border border-paper/30 bg-ink/60 px-3 py-1 font-marker text-[11px] text-primary backdrop-blur">
-                        Nº {String(hero.no).padStart(3, "0")} · cover
-                      </div>
-                    </div>
-                    <div className="mt-5 flex items-end justify-between gap-6 border-t border-paper/15 pt-4">
-                      <div className="font-display text-2xl uppercase tracking-tight md:text-4xl">{hero.name}</div>
-                      <div className="text-right">
-                        <div className="text-[10px] uppercase tracking-widest text-paper/50">from</div>
-                        <div className="font-display text-2xl text-primary">{hero.price} <span className="text-sm text-paper/60">RON</span></div>
-                      </div>
-                    </div>
-                  </Link>
-                )}
-                <ol className="col-span-12 flex flex-col divide-y divide-paper/10 md:col-span-4">
-                  {rest.map((p, i) => (
-                    <li key={p.slug}>
-                      <Link
-                        to="/product/$slug"
-                        params={{ slug: p.slug }}
-                        className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-5 transition hover:pl-2"
-                      >
-                        <div className="font-display text-xl text-primary tabular-nums">0{i + 2}</div>
-                        <div>
-                          <div className="font-marker text-[11px] text-paper/50">Nº {String(p.no).padStart(3, "0")}</div>
-                          <div className="font-display text-lg uppercase leading-tight tracking-tight">{p.name}</div>
-                        </div>
-                        <div className="relative aspect-square w-16 overflow-hidden rounded-sm bg-paper/5">
-                          <img src={p.img} alt={p.name} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-110" />
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            );
-          })()}
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+            {PRODUCTS.filter((p) => p.category === "in-a-blush-state").slice(0, 4).map((p, i) => (
+              <ProductCard key={p.slug} product={p} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
