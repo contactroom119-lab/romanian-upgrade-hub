@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { FOOTER_VIDEO } from "@/lib/room119-data";
+import { Mail, Phone, MapPin, Clock, Instagram, Music2, CreditCard, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 
 export function Footer({ compact = false }: { compact?: boolean }) {
   return (
@@ -10,8 +11,10 @@ export function Footer({ compact = false }: { compact?: boolean }) {
         muted
         loop
         playsInline
-        className="absolute inset-0 h-full w-full object-cover opacity-30"
+        className="absolute inset-0 h-full w-full object-cover opacity-20"
       />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/85 to-ink" />
+
       {!compact && (
         <div className="relative mx-auto max-w-[1400px] px-4 py-24 text-center md:px-8 md:py-32">
           <div className="mb-4 font-marker text-primary">→ the closing credits</div>
@@ -38,17 +41,71 @@ export function Footer({ compact = false }: { compact?: boolean }) {
         </div>
       )}
 
+      {/* Trust strip */}
       <div className="relative border-t border-paper/10">
-        <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-14 md:grid-cols-4 md:px-8">
-          <div>
-            <div className="font-marker text-2xl text-paper">
+        <div className="mx-auto grid max-w-[1400px] gap-6 px-4 py-8 sm:grid-cols-2 md:grid-cols-4 md:px-8">
+          {[
+            { Icon: Truck, title: "Livrare rapidă", sub: "2–4 zile lucrătoare în RO" },
+            { Icon: RotateCcw, title: "Retur 14 zile", sub: "Conform OUG 34/2014" },
+            { Icon: ShieldCheck, title: "Plată securizată", sub: "Stripe · Netopia · 3DS" },
+            { Icon: CreditCard, title: "Card sau ramburs", sub: "Visa · Mastercard · cash" },
+          ].map(({ Icon, title, sub }) => (
+            <div key={title} className="flex items-start gap-3">
+              <div className="rounded-xl border border-paper/15 bg-paper/5 p-2 text-primary">
+                <Icon className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="font-display text-sm uppercase tracking-widest">{title}</div>
+                <div className="text-xs text-paper/60">{sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main link columns */}
+      <div className="relative border-t border-paper/10">
+        <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-14 md:grid-cols-12 md:px-8">
+          {/* Brand + contact */}
+          <div className="md:col-span-4">
+            <div className="font-marker text-3xl text-paper">
               ROOM<span className="text-primary">/</span>119
             </div>
             <p className="mt-3 max-w-xs text-sm text-paper/70">
-              Postere, printuri și artă purtabilă. Făcute și expediate din România.
+              Postere, printuri și artă purtabilă. Făcute, imprimate și expediate din România.
             </p>
+
+            <ul className="mt-6 space-y-3 text-sm text-paper/80">
+              <li className="flex items-start gap-2">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <a href="mailto:hello@room119.ro" className="link-reveal">hello@room119.ro</a>
+              </li>
+              <li className="flex items-start gap-2">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <a href="tel:+40770000000" className="link-reveal">+40 770 000 000</a>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <span>Str. Exemplu 119, Sector 1, București, România</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <span>Luni–Vineri · 10:00–18:00 (răspundem în 24h)</span>
+              </li>
+            </ul>
+
+            <div className="mt-6 flex gap-3">
+              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="rounded-full border border-paper/20 bg-paper/5 p-2 transition hover:bg-primary hover:text-primary-foreground">
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok" className="rounded-full border border-paper/20 bg-paper/5 p-2 transition hover:bg-primary hover:text-primary-foreground">
+                <Music2 className="h-4 w-4" />
+              </a>
+            </div>
           </div>
-          <div>
+
+          {/* Shop */}
+          <div className="md:col-span-2">
             <div className="mb-3 font-display text-sm uppercase tracking-[0.2em] text-paper/60">Shop</div>
             <ul className="space-y-2 text-sm">
               <li><Link to="/category/$slug" params={{ slug: "monochrome" }} className="link-reveal">Monochrome</Link></li>
@@ -56,38 +113,63 @@ export function Footer({ compact = false }: { compact?: boolean }) {
               <li><Link to="/category/$slug" params={{ slug: "red-flags-only" }} className="link-reveal">Red Flags Only</Link></li>
               <li><Link to="/category/$slug" params={{ slug: "all-the-things" }} className="link-reveal">All the Things</Link></li>
               <li><Link to="/custom" className="link-reveal">Comandă custom</Link></li>
+              <li><Link to="/search" className="link-reveal">Caută</Link></li>
             </ul>
           </div>
-          <div>
+
+          {/* Info */}
+          <div className="md:col-span-2">
             <div className="mb-3 font-display text-sm uppercase tracking-[0.2em] text-paper/60">Informații</div>
             <ul className="space-y-2 text-sm">
               <li><Link to="/despre" className="link-reveal">Despre Room 119</Link></li>
               <li><Link to="/contact" className="link-reveal">Contact</Link></li>
-              <li><Link to="/legal/livrare" className="link-reveal">Livrare</Link></li>
+              <li><Link to="/legal/livrare" className="link-reveal">Livrare & tarife</Link></li>
               <li><Link to="/legal/retur" className="link-reveal">Retur & rambursare</Link></li>
+              <li><Link to="/cart" className="link-reveal">Coșul meu</Link></li>
             </ul>
           </div>
-          <div>
+
+          {/* Legal */}
+          <div className="md:col-span-2">
             <div className="mb-3 font-display text-sm uppercase tracking-[0.2em] text-paper/60">Legal</div>
             <ul className="space-y-2 text-sm">
               <li><Link to="/legal/termeni" className="link-reveal">Termeni și condiții</Link></li>
               <li><Link to="/legal/confidentialitate" className="link-reveal">Confidențialitate</Link></li>
-              <li><Link to="/legal/cookies" className="link-reveal">Cookies</Link></li>
+              <li><Link to="/legal/cookies" className="link-reveal">Politica de cookies</Link></li>
               <li><Link to="/legal/gdpr" className="link-reveal">GDPR</Link></li>
               <li><Link to="/legal/anpc" className="link-reveal">ANPC / SOL</Link></li>
             </ul>
           </div>
+
+          {/* Company card */}
+          <div className="md:col-span-2">
+            <div className="mb-3 font-display text-sm uppercase tracking-[0.2em] text-paper/60">Compania</div>
+            <div className="rounded-xl border border-paper/15 bg-paper/5 p-4 text-xs leading-relaxed text-paper/75">
+              <div className="font-semibold text-paper">Room 119 SRL</div>
+              <div>CUI: RO000000</div>
+              <div>Reg. Com.: J40/000/2024</div>
+              <div>IBAN: RO00 BTRL 0000 0000 0000 0000</div>
+              <div className="mt-2">Capital social: 1.000 RON</div>
+            </div>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-widest text-paper/60">
+              <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noreferrer" className="rounded-md border border-paper/20 bg-paper/5 px-2 py-1 hover:bg-primary hover:text-primary-foreground">ANPC · SAL</a>
+              <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noreferrer" className="rounded-md border border-paper/20 bg-paper/5 px-2 py-1 hover:bg-primary hover:text-primary-foreground">SOL</a>
+            </div>
+          </div>
         </div>
 
+        {/* Bottom bar */}
         <div className="border-t border-paper/10">
-          <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-4 px-4 py-6 text-xs uppercase tracking-[0.2em] text-paper/70 md:flex-row md:px-8">
-            <div>© {new Date().getFullYear()} Room 119 · CUI RO000000 · J40/000/2024</div>
-            <div className="flex gap-6">
-              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" className="link-reveal">Instagram</a>
-              <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" className="link-reveal">TikTok</a>
-              <a href="https://anpc.ro" target="_blank" rel="noreferrer" className="link-reveal">ANPC</a>
-              <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noreferrer" className="link-reveal">SOL</a>
+          <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-4 px-4 py-6 text-[11px] uppercase tracking-[0.2em] text-paper/60 md:flex-row md:px-8">
+            <div>© {new Date().getFullYear()} Room 119 SRL · Toate drepturile rezervate</div>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link to="/legal/termeni" className="link-reveal">Termeni</Link>
+              <Link to="/legal/confidentialitate" className="link-reveal">Confidențialitate</Link>
+              <Link to="/legal/cookies" className="link-reveal">Cookies</Link>
+              <Link to="/legal/gdpr" className="link-reveal">GDPR</Link>
+              <Link to="/legal/anpc" className="link-reveal">ANPC</Link>
             </div>
+            <div className="text-paper/50">Made with <span className="text-primary">♥</span> în București</div>
           </div>
         </div>
       </div>
