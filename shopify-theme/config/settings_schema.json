@@ -1,0 +1,100 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Room 119",
+    "theme_version": "1.0.0",
+    "theme_author": "Room 119",
+    "theme_documentation_url": "https://github.com/contactroom119-lab/romanian-upgrade-hub",
+    "theme_support_url": "https://github.com/contactroom119-lab/romanian-upgrade-hub/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Defaults mirror the OKLCH originals from the React app. The Customizer emits hex, so hex fallbacks are used here (OKLCH noted per color)."
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "Paper (background)",
+        "default": "#f6f2ea",
+        "info": "Original: oklch(0.965 0.012 85) — warm off-white"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink (near-black)",
+        "default": "#1a1613",
+        "info": "Original: oklch(0.15 0.01 60)"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary (vermilion)",
+        "default": "#e5512c",
+        "info": "Original: oklch(0.66 0.22 33) — the signature Room 119 color"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#eaa04d",
+        "info": "Original: oklch(0.78 0.15 60)"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Fonts load from Google Fonts (Anton, Archivo Black, Permanent Marker, Inter)."
+      },
+      {
+        "type": "checkbox",
+        "id": "use_archivo",
+        "label": "Use Archivo Black for display headings",
+        "default": false,
+        "info": "Off = Anton (the original). On swaps display headings to Archivo Black."
+      }
+    ]
+  },
+  {
+    "name": "Social & contact",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok URL" },
+      { "type": "text", "id": "social_email", "label": "Contact email", "info": "Shown as a mailto link in the footer." }
+    ]
+  },
+  {
+    "name": "Effects",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "grain_overlay",
+        "label": "Grain overlay",
+        "default": true,
+        "info": "Applies the film-grain texture to the page background and cards."
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "32 × 32 px recommended." }
+    ]
+  },
+  {
+    "name": "Migration (temporary)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "TEMPORARY video fallbacks. The defaults point at the old Wix CDN and MUST be re-uploaded to Shopify (see README). Prefer the per-section Video fields instead."
+      },
+      { "type": "text", "id": "hero_video_url", "label": "Hero video URL (temporary)" },
+      { "type": "text", "id": "footer_video_url", "label": "Footer video URL (temporary)" }
+    ]
+  }
+]

@@ -1,0 +1,97 @@
+{%- comment -%}
+  Footer — ports the closing video band + newsletter + bottom bar.
+  Newsletter uses Shopify's {% form 'customer' %} (replaces the inert React form).
+  Social links come from theme settings; extra links from an optional menu.
+{%- endcomment -%}
+
+<footer id="footer" class="r119-footer">
+  {%- assign footer_url = section.settings.footer_video_url | default: settings.footer_video_url -%}
+  {%- if section.settings.footer_video != blank -%}
+    {{ section.settings.footer_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'r119-footer__video' }}
+  {%- elsif footer_url != blank -%}
+    <video class="r119-footer__video" autoplay muted loop playsinline src="{{ footer_url }}"></video>
+  {%- endif -%}
+
+  <div class="r119-container r119-footer__inner">
+    <div class="r119-footer__eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="r119-footer__title">
+      {{ section.settings.line_1 }}<br>
+      {{ section.settings.line_2 }}<br>
+      <span class="accent">{{ section.settings.line_3 }}</span>
+    </h2>
+
+    {%- if section.settings.show_newsletter -%}
+      {%- form 'customer' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="r119-newsletter">
+          <input
+            type="email"
+            name="contact[email]"
+            required
+            placeholder="{{ section.settings.newsletter_placeholder | escape }}"
+            aria-label="{{ 'general.newsletter_form.email_placeholder' | t | default: 'Email' }}">
+          <button type="submit">{{ section.settings.newsletter_button }}</button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="r119-newsletter__msg">{{ 'general.newsletter_form.confirmation' | t | default: "Thanks — you're on the list." }}</p>
+        {%- elsif form.errors -%}
+          <p class="r119-newsletter__msg">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+
+  <div class="r119-footer__bar">
+    <div class="r119-container r119-footer__bar-inner">
+      <div class="r119-footer__logo font-marker">ROOM<span class="slash">/</span>119</div>
+
+      <div class="r119-footer__links">
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" class="link-reveal" target="_blank" rel="noopener">Instagram</a>
+        {%- endif -%}
+        {%- if settings.social_tiktok != blank -%}
+          <a href="{{ settings.social_tiktok }}" class="link-reveal" target="_blank" rel="noopener">TikTok</a>
+        {%- endif -%}
+        {%- if settings.social_email != blank -%}
+          <a href="mailto:{{ settings.social_email }}" class="link-reveal">Email</a>
+        {%- endif -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="link-reveal">{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "video",
+      "id": "footer_video",
+      "label": "Footer video (Shopify-hosted)",
+      "info": "Preferred. Overrides the URL fallback below."
+    },
+    {
+      "type": "text",
+      "id": "footer_video_url",
+      "label": "Footer video URL (fallback)",
+      "info": "Leave blank to use the temporary global default (Theme settings → Migration). Re-upload to Shopify. See README."
+    },
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "→ the closing credits" },
+    { "type": "text", "id": "line_1", "label": "Line 1", "default": "YOU FOUND" },
+    { "type": "text", "id": "line_2", "label": "Line 2", "default": "THE ROOM." },
+    { "type": "text", "id": "line_3", "label": "Line 3 (accent)", "default": "NOW, MAKE IT YOURS." },
+    { "type": "header", "content": "Newsletter" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show newsletter form", "default": true },
+    { "type": "text", "id": "newsletter_placeholder", "label": "Placeholder", "default": "your@email.com — join the drops" },
+    { "type": "text", "id": "newsletter_button", "label": "Button text", "default": "Sign me up" },
+    { "type": "header", "content": "Bottom bar" },
+    { "type": "link_list", "id": "menu", "label": "Extra links menu", "info": "e.g. Shipping, Privacy. Social links are set in Theme settings." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,84 @@
+{%- comment -%}
+  Custom order — ports the full-bleed vermilion CTA section with the rotated
+  "receipt" card. Steps are editable blocks. CTA is a URL setting (point it at
+  a Shopify contact page).
+{%- endcomment -%}
+
+<section id="custom" class="r119-custom">
+  <div class="r119-custom__glow"></div>
+  <div class="r119-container r119-custom__inner">
+    <div>
+      <div class="r119-custom__eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="r119-custom__title">
+        {{ section.settings.title_lead }}<br>
+        {{ section.settings.title_line_2 }} <em>{{ section.settings.title_accent }}</em>
+      </h2>
+      <div class="r119-custom__body">{{ section.settings.body }}</div>
+      {%- if section.settings.cta_text != blank -%}
+        <a href="{{ section.settings.cta_url | default: '#' }}" class="r119-btn r119-btn--ink r119-custom__cta">
+          {{ section.settings.cta_text }} {% render 'icon', name: 'arrow-right', size: '1rem' %}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="r119-receipt-wrap">
+      <div class="r119-receipt-deco" aria-hidden="true"></div>
+      <div class="r119-receipt">
+        <div class="r119-receipt__head">{{ section.settings.receipt_head }}</div>
+        <ul class="r119-receipt__steps">
+          {%- for block in section.blocks -%}
+            <li class="r119-receipt__step" {{ block.shopify_attributes }}>
+              <span class="r119-receipt__num">{{ forloop.index }}</span>
+              <span>{{ block.settings.text }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="r119-receipt__cut">{{ section.settings.scissors }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom order",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "04 / Made for you" },
+    { "type": "text", "id": "title_lead", "label": "Title line 1", "default": "Not seeing exactly" },
+    { "type": "text", "id": "title_line_2", "label": "Title line 2", "default": "what you're" },
+    { "type": "text", "id": "title_accent", "label": "Title accent (marker font)", "default": "looking for?" },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Or maybe you spotted a poster you'd wear on a t-shirt instead? Good news — I'm one message away. Tweak a design, move it onto something else, or create something custom. Room 119 is all about making spaces (and outfits) feel more like you.</p>"
+    },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "Send message" },
+    { "type": "url", "id": "cta_url", "label": "Button link", "info": "Point this at a Shopify contact page (e.g. /pages/contact)." },
+    { "type": "header", "content": "Receipt card" },
+    { "type": "text", "id": "receipt_head", "label": "Card heading", "default": "room119 // custom order" },
+    { "type": "text", "id": "scissors", "label": "Dashed line", "default": "✂ - - - - - - - - - - - - - - - - - -" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Step", "default": "Tell me the design + the object (poster, tee, hoodie, tote…)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Custom order",
+      "blocks": [
+        { "type": "step", "settings": { "text": "Tell me the design + the object (poster, tee, hoodie, tote…)" } },
+        { "type": "step", "settings": { "text": "I mock it up, you approve" } },
+        { "type": "step", "settings": { "text": "Printed & shipped from Romania" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

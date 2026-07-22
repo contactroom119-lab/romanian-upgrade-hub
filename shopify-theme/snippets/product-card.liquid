@@ -1,0 +1,84 @@
+{%- comment -%}
+  Product card — ports the poster card from the React bestsellers grid.
+  Reused by bestsellers.liquid (and available to future templates).
+
+  Params:
+    product (required) — a Shopify product object
+    number  (optional) — the "No X" badge value (defaults to loop position)
+    index   (optional) — 0-based index; drives the alternating -1deg / +1deg tilt
+    show_new (optional) — show the "New" badge (default true)
+
+  The whole card is NOT a single <a> (the slide-up "Add to cart" is a real
+  product form and must not be nested in a link). The image and title link to
+  the product; the add-to-cart button is a sibling form.
+{%- endcomment -%}
+
+{%- liquid
+  assign p = product
+  assign idx = index | default: 0
+  assign rot = -1
+  assign parity = idx | modulo: 2
+  if parity != 0
+    assign rot = 1
+  endif
+  assign show_new_badge = show_new
+  if show_new == nil
+    assign show_new_badge = true
+  endif
+-%}
+
+{%- if p == blank -%}
+  <article class="r119-product poster" style="transform: rotate({{ rot }}deg);">
+    <div class="r119-product__media">
+      <div class="r119-placeholder">Pick a product</div>
+    </div>
+    <div class="r119-product__foot">
+      <div>
+        <div class="r119-product__name">Product</div>
+        <div class="r119-product__tag">—</div>
+      </div>
+    </div>
+  </article>
+{%- else -%}
+  {%- liquid
+    assign tagline = p.metafields.custom.tagline
+    if tagline == blank and p.tags.size > 0
+      assign tagline = p.tags.first
+    endif
+    assign variant = p.selected_or_first_available_variant
+  -%}
+  <article class="r119-product poster" style="transform: rotate({{ rot }}deg);">
+    <div class="r119-product__media">
+      <a href="{{ p.url }}" aria-label="{{ p.title | escape }}">
+        {%- if p.featured_image != blank -%}
+          <img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.featured_image.alt | escape | default: p.title | escape }}" loading="lazy" width="600" height="800">
+        {%- else -%}
+          <div class="r119-placeholder">{{ p.title }}</div>
+        {%- endif -%}
+      </a>
+      {%- if show_new_badge -%}
+        <span class="r119-product__badge r119-product__badge--new">New</span>
+      {%- endif -%}
+      {%- if number != blank -%}
+        <span class="r119-product__badge r119-product__badge--no">No {{ number }}</span>
+      {%- endif -%}
+      {%- if variant != blank -%}
+        {%- form 'product', p -%}
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <button type="submit" class="r119-product__cart"{% unless variant.available %} disabled{% endunless %}>
+            <span>{% render 'icon', name: 'plus', size: '1rem' %} {% if variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
+          </button>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+    <div class="r119-product__foot">
+      <div>
+        <a href="{{ p.url }}" class="r119-product__name">{{ p.title }}</a>
+        {%- if tagline != blank -%}
+          <div class="r119-product__tag">{{ tagline }}</div>
+        {%- endif -%}
+      </div>
+      <div class="r119-product__price">{{ p.price | money }}</div>
+    </div>
+  </article>
+{%- endif -%}

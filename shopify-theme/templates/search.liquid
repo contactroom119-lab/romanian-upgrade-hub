@@ -1,0 +1,33 @@
+{%- comment -%}
+  Minimal search stub (the header search posts here). Not part of the design
+  scope. See README.
+{%- endcomment -%}
+<section class="r119-section r119-container">
+  <div class="r119-section__head">
+    <div><h2 class="r119-h2">Search</h2></div>
+  </div>
+
+  <form action="{{ routes.search_url }}" method="get" role="search" style="margin-bottom: 2rem;">
+    <div class="r119-search" style="display: inline-flex; border-color: var(--border); background: var(--card);">
+      {% render 'icon', name: 'search', size: '1rem' %}
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search posters…" style="color: var(--foreground);">
+    </div>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results.size > 0 -%}
+      <p style="color: var(--muted-foreground); margin-bottom: 1rem;">{{ search.results_count }} results for “{{ search.terms }}”.</p>
+      <div class="r119-cat-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item, number: forloop.index, index: forloop.index0, show_new: false %}
+          {%- else -%}
+            <a href="{{ item.url }}" class="r119-cat"><div class="r119-cat__foot"><div class="r119-cat__name" style="font-size: 1.1rem;">{{ item.title }}</div></div></a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="r119-placeholder" style="min-height: 10rem;">No results for “{{ search.terms }}”.</div>
+    {%- endif -%}
+  {%- endif -%}
+</section>

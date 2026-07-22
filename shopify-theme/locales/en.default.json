@@ -1,0 +1,25 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "main_menu": "Main menu"
+    },
+    "search": {
+      "search": "Search"
+    },
+    "newsletter_form": {
+      "email_placeholder": "Email",
+      "confirmation": "Thanks — you're on the list."
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "Cart"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Account"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{%- comment -%}
+  Header — ports the React <header> in src/routes/index.tsx.
+  Sticky, ink background, paper text. Logo, nav (Shopify linklist),
+  search, account, cart. Scroll state handled by room119.js (.is-scrolled).
+{%- endcomment -%}
+
+<header class="r119-header" data-r119-header>
+  <div class="r119-container r119-header__inner">
+    <a href="{{ routes.root_url }}" class="r119-logo font-marker" aria-label="{{ shop.name | escape }} — home">
+      ROOM<span class="slash">/</span>119
+    </a>
+
+    <nav class="r119-nav" aria-label="{{ 'general.accessibility.main_menu' | t | default: 'Main menu' }}">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}" class="link-reveal"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- else -%}
+        {%- comment -%} Fallback anchors mirroring the React nav when no menu is set {%- endcomment -%}
+        <a href="{{ routes.all_products_collection_url }}" class="link-reveal">Shop</a>
+        <a href="{{ routes.search_url }}" class="link-reveal">Bestsellers</a>
+        <a href="{{ routes.root_url }}#custom" class="link-reveal">Custom</a>
+        <a href="{{ routes.root_url }}#footer" class="link-reveal">Contact</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="r119-header__actions">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="r119-search">
+        {% render 'icon', name: 'search', size: '1rem' %}
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ section.settings.search_placeholder | escape }}"
+          aria-label="{{ 'general.search.search' | t | default: 'Search' }}">
+      </form>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="r119-iconbtn" aria-label="{{ 'customer.account.title' | t | default: 'Account' }}">
+          {% render 'icon', name: 'user', size: '1.25rem' %}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="r119-iconbtn" aria-label="{{ 'sections.cart.title' | t | default: 'Cart' }} ({{ cart.item_count }})">
+        {% render 'icon', name: 'shopping-bag', size: '1.25rem' %}
+        <span class="r119-cart__count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu",
+      "info": "Create/edit this menu in Online Store → Navigation."
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search posters…"
+    }
+  ]
+}
+{% endschema %}

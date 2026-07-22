@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {%- comment -%} Fonts — same Google Fonts request as src/routes/__root.tsx {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Permanent+Marker&family=Inter:wght@400;500;600;700&display=swap">
+
+    {{ content_for_header }}
+
+    {{ 'room119.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%}
+      Merchant-editable tokens injected onto :room119.css defaults.
+      The Customizer emits hex; these override the OKLCH originals in room119.css.
+      Font-display toggle swaps Anton <-> Archivo Black.
+    {%- endcomment -%}
+    <style>
+      :root {
+        --paper: {{ settings.color_paper | default: '#f6f2ea' }};
+        --ink: {{ settings.color_ink | default: '#1a1613' }};
+        --primary: {{ settings.color_primary | default: '#e5512c' }};
+        --accent: {{ settings.color_accent | default: '#eaa04d' }};
+        --background: var(--paper);
+        --foreground: var(--ink);
+        {%- if settings.use_archivo -%}
+          --font-display: "Archivo Black", "Anton", sans-serif;
+        {%- endif -%}
+      }
+    </style>
+  </head>
+
+  <body class="{% unless settings.grain_overlay %}no-grain{% endunless %}">
+    {%- comment -%} Skip link for a11y {%- endcomment -%}
+    <a class="visually-hidden" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    {%- comment -%}
+      Global chrome, rendered on every template as static sections:
+      the top (normal) marquee, the sticky header, and the footer.
+      The homepage body — including the SECOND, reversed marquee after the
+      hero — is driven by templates/index.json.
+    {%- endcomment -%}
+    {% section 'announcement-marquee' %}
+    {% section 'header' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    {{ 'room119.js' | asset_url | script_tag }}
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{%- comment -%}
+  Inline lucide icons (paths copied verbatim from lucide-react source).
+  The React homepage used: arrow-right, arrow-up-right, search, shopping-bag,
+  user, sparkles, plus.
+
+  Usage:
+    {% render 'icon', name: 'arrow-right' %}
+    {% render 'icon', name: 'search', size: '1.25rem' %}
+    {% render 'icon', name: 'plus', class: 'r119-icon--muted' %}
+
+  Params:
+    name  (required) — icon id
+    size  (optional) — CSS length for width/height, default 1em
+    class (optional) — extra class(es) on the <svg>
+{%- endcomment -%}
+{%- liquid
+  assign icon_size = size | default: '1em'
+  assign icon_class = class | default: ''
+-%}
+<svg xmlns="http://www.w3.org/2000/svg" class="lucide {{ icon_class }}" style="width:{{ icon_size }};height:{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {%- case name -%}
+    {%- when 'arrow-right' -%}
+      <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+    {%- when 'arrow-up-right' -%}
+      <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+    {%- when 'search' -%}
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+    {%- when 'shopping-bag' -%}
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+    {%- when 'user' -%}
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+    {%- when 'sparkles' -%}
+      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+    {%- when 'plus' -%}
+      <path d="M5 12h14"/><path d="M12 5v14"/>
+  {%- endcase -%}
+</svg>

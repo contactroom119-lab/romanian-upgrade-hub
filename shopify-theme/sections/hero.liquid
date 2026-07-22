@@ -1,0 +1,151 @@
+{%- comment -%}
+  Hero — ports the React hero section.
+  Background video @40% + gradient overlay, headline, lede, CTAs, stat blocks,
+  and the floating "retro TV" card (second video copy, scanlines, tape, stickers).
+
+  Video source: prefer a Shopify-hosted video (settings.hero_video); fall back
+  to a URL (settings.hero_video_url). The two Wix URLs live only in
+  settings_data.json as TEMPORARY defaults — see README (must be re-uploaded).
+{%- endcomment -%}
+
+{%- comment -%}
+  Resolve the video URL fallback: section field first, then the global
+  temporary default (settings.hero_video_url, which holds the old Wix URL in
+  settings_data.json). No Wix URL is hardcoded in this file.
+{%- endcomment -%}
+{%- assign hero_url = section.settings.hero_video_url | default: settings.hero_video_url -%}
+
+<section id="top" class="r119-hero">
+  <div class="r119-hero__bg">
+    {%- if section.settings.hero_video != blank -%}
+      {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
+    {%- elsif hero_url != blank -%}
+      <video autoplay muted loop playsinline src="{{ hero_url }}"></video>
+    {%- endif -%}
+    <div class="r119-hero__bg-overlay"></div>
+  </div>
+
+  <div class="r119-container r119-hero__inner">
+    <div class="r119-hero__copy">
+      <div class="r119-badge">
+        <span class="r119-badge__dot r119-pulse"></span>
+        {{ section.settings.badge_text }}
+      </div>
+
+      <h1 class="r119-hero__title">
+        {{ section.settings.title_line_1 }}<br>{{ section.settings.title_line_2 }}
+      </h1>
+
+      <p class="r119-hero__lede">{{ section.settings.lede }}</p>
+
+      <div class="r119-hero__ctas">
+        {%- if section.settings.cta1_text != blank -%}
+          <a href="{{ section.settings.cta1_url | default: '#categories' }}" class="r119-btn r119-btn--primary">
+            {{ section.settings.cta1_text }}
+            {% render 'icon', name: 'arrow-right', size: '1rem' %}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta2_text != blank -%}
+          <a href="{{ section.settings.cta2_url | default: '#custom' }}" class="r119-btn r119-btn--outline">
+            {{ section.settings.cta2_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="r119-stats">
+          {%- for block in section.blocks -%}
+            <div class="r119-stat" {{ block.shopify_attributes }}>
+              <div class="r119-stat__k">{{ block.settings.value }}</div>
+              <div class="r119-stat__v">{{ block.settings.label }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="r119-hero__media">
+      <div class="animate-float r119-tv">
+        <div class="r119-tv__screen">
+          {%- if section.settings.hero_video != blank -%}
+            {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
+          {%- elsif hero_url != blank -%}
+            <video autoplay muted loop playsinline src="{{ hero_url }}"></video>
+          {%- else -%}
+            <div class="r119-placeholder">Add a hero video in the theme editor</div>
+          {%- endif -%}
+          <div class="r119-tv__scan"></div>
+          <div class="r119-tv__caption">
+            <span class="r119-tv__welcome">{{ section.settings.tv_caption | default: 'WELCOME!' }}</span>
+            <span class="r119-tv__channel">{{ section.settings.tv_channel | default: 'CH 119' }}</span>
+          </div>
+        </div>
+        <span class="tape"></span>
+      </div>
+      <div class="sticker r119-sticker--drops font-marker">{{ section.settings.sticker_1 | default: 'new drops!' }}</div>
+      <div class="sticker r119-sticker--est font-display">{{ section.settings.sticker_2 | default: 'EST. 119' }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "video",
+      "id": "hero_video",
+      "label": "Hero video (Shopify-hosted)",
+      "info": "Preferred. Overrides the URL fallback below."
+    },
+    {
+      "type": "text",
+      "id": "hero_video_url",
+      "label": "Hero video URL (fallback)",
+      "info": "Leave blank to use the temporary global default (Theme settings → Migration). Re-upload to Shopify and use the video field above. See README."
+    },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "Room 119 — Your Space. Your Rules." },
+    { "type": "text", "id": "title_line_1", "label": "Title line 1", "default": "ROOM" },
+    { "type": "text", "id": "title_line_2", "label": "Title line 2", "default": "119." },
+    {
+      "type": "richtext",
+      "id": "lede",
+      "label": "Lede",
+      "default": "<p>Art you can wear, hang, and live in. Posters, prints and everyday chaos — printed with care in Romania.</p>"
+    },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "cta1_text", "label": "Primary button text", "default": "Shop the Room" },
+    { "type": "url", "id": "cta1_url", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_text", "label": "Secondary button text", "default": "Make it custom" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary button link" },
+    { "type": "header", "content": "Retro TV card" },
+    { "type": "text", "id": "tv_caption", "label": "Caption", "default": "WELCOME!" },
+    { "type": "text", "id": "tv_channel", "label": "Channel badge", "default": "CH 119" },
+    { "type": "text", "id": "sticker_1", "label": "Sticker 1", "default": "new drops!" },
+    { "type": "text", "id": "sticker_2", "label": "Sticker 2", "default": "EST. 119" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "119+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "designs" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "119+", "label": "designs" } },
+        { "type": "stat", "settings": { "value": "RO", "label": "printed" } },
+        { "type": "stat", "settings": { "value": "48h", "label": "shipping" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+{%- comment -%}
+  Minimal collection stub — reuses the poster product-card so collection pages
+  match the homepage grid. Not part of the design scope. See README.
+{%- endcomment -%}
+<section class="r119-section r119-container">
+  <div class="r119-section__head">
+    <div>
+      <div class="r119-eyebrow">Collection</div>
+      <h2 class="r119-h2">{{ collection.title }}</h2>
+    </div>
+  </div>
+
+  {%- if collection.products.size > 0 -%}
+    {%- paginate collection.products by 12 -%}
+      <div class="r119-cat-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product, number: forloop.index, index: forloop.index0, show_new: false %}
+        {%- endfor -%}
+      </div>
+      {{ paginate | default_pagination }}
+    {%- endpaginate -%}
+  {%- else -%}
+    <div class="r119-placeholder" style="min-height: 12rem;">No products in this collection yet.</div>
+  {%- endif -%}
+</section>

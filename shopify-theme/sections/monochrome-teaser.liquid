@@ -1,0 +1,114 @@
+{%- comment -%}
+  Monochrome teaser — ports the asymmetric "monochrome" grid:
+  one large 2-column card + two stacked cards on the right.
+  Each card links to a collection (with image-override + featured-image fallback).
+{%- endcomment -%}
+
+{%- liquid
+  assign big_coll = section.settings.big_collection
+  assign big_img = section.settings.big_image
+  if big_img == blank and big_coll != blank
+    assign big_img = big_coll.image | default: big_coll.featured_image
+  endif
+  assign big_url = '#'
+  if big_coll != blank
+    assign big_url = big_coll.url
+  endif
+
+  assign c1_coll = section.settings.cell1_collection
+  assign c1_img = section.settings.cell1_image
+  if c1_img == blank and c1_coll != blank
+    assign c1_img = c1_coll.image | default: c1_coll.featured_image
+  endif
+  assign c1_url = '#'
+  if c1_coll != blank
+    assign c1_url = c1_coll.url
+  endif
+
+  assign c2_coll = section.settings.cell2_collection
+  assign c2_url = '#'
+  if c2_coll != blank
+    assign c2_url = c2_coll.url
+  endif
+-%}
+
+<section class="r119-section r119-container">
+  <div class="r119-section__head">
+    <div>
+      <div class="r119-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="r119-h2">
+        {{ section.settings.heading }} <span class="accent">{{ section.settings.heading_accent }}</span>
+      </h2>
+    </div>
+    {%- if big_coll != blank -%}
+      <a href="{{ big_url }}" class="r119-viewall link-reveal">
+        View all {% render 'icon', name: 'arrow-up-right', size: '1rem' %}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="r119-mono">
+    <a href="{{ big_url }}" class="r119-mono__big grainy">
+      {%- if big_img != blank -%}
+        <img src="{{ big_img | image_url: width: 1000 }}" alt="{{ section.settings.big_title | escape }}" loading="lazy">
+      {%- endif -%}
+      <div class="r119-mono__big-overlay"></div>
+      <div class="r119-mono__big-cap">
+        <div class="eyebrow">{{ section.settings.big_eyebrow }}</div>
+        <div class="title">{{ section.settings.big_title }}</div>
+      </div>
+    </a>
+
+    <div class="r119-mono__col">
+      <a href="{{ c1_url }}" class="r119-mono__cell r119-mono__cell--primary grainy">
+        {%- if c1_img != blank -%}
+          <img src="{{ c1_img | image_url: width: 600 }}" alt="{{ section.settings.cell1_title | escape }}" loading="lazy">
+        {%- endif -%}
+        <div class="r119-mono__cell-center">
+          <div>
+            <div class="eyebrow">{{ section.settings.cell1_eyebrow }}</div>
+            <div class="title">{{ section.settings.cell1_title }}</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="{{ c2_url }}" class="r119-mono__cell r119-mono__cell--card grainy">
+        <div class="r119-mono__cell-center">
+          <div>
+            <div class="eyebrow">{{ section.settings.cell2_eyebrow }}</div>
+            <div class="title">{{ section.settings.cell2_title }}</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Monochrome teaser",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "03 / Loud & quiet" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our best sellers —" },
+    { "type": "text", "id": "heading_accent", "label": "Heading (accent)", "default": "monochrome" },
+    { "type": "header", "content": "Large card" },
+    { "type": "collection", "id": "big_collection", "label": "Collection" },
+    { "type": "image_picker", "id": "big_image", "label": "Image override" },
+    { "type": "text", "id": "big_eyebrow", "label": "Eyebrow", "default": "The house classics" },
+    { "type": "text", "id": "big_title", "label": "Title", "default": "BLACK. WHITE. LOUD." },
+    { "type": "header", "content": "Top-right card" },
+    { "type": "collection", "id": "cell1_collection", "label": "Collection" },
+    { "type": "image_picker", "id": "cell1_image", "label": "Image override" },
+    { "type": "text", "id": "cell1_eyebrow", "label": "Eyebrow", "default": "Category" },
+    { "type": "text", "id": "cell1_title", "label": "Title", "default": "RED FLAGS ONLY" },
+    { "type": "header", "content": "Bottom-right card" },
+    { "type": "collection", "id": "cell2_collection", "label": "Collection" },
+    { "type": "text", "id": "cell2_eyebrow", "label": "Eyebrow", "default": "Everything else" },
+    { "type": "text", "id": "cell2_title", "label": "Title", "default": "ALL THE THINGS →" }
+  ],
+  "presets": [
+    { "name": "Monochrome teaser" }
+  ]
+}
+{% endschema %}

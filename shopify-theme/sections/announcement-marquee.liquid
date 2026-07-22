@@ -1,0 +1,74 @@
+{%- comment -%}
+  Announcement marquee — ports the React <Marquee /> component.
+  Dark ink bar; text scrolls with a sparkle icon between items.
+  Used twice on the homepage: once (normal) above the header via theme.liquid,
+  once (reverse) after the hero via templates/index.json.
+{%- endcomment -%}
+
+<div class="r119-marquee">
+  <div class="marquee-track"{% if section.settings.reverse %} style="animation-direction: reverse;"{% endif %}>
+    {%- comment -%} Two identical groups so the -50% translate loops seamlessly {%- endcomment -%}
+    {%- for i in (1..2) -%}
+      <div class="marquee-group" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
+        {%- for block in section.blocks -%}
+          <span class="marquee-item" {{ block.shopify_attributes }}>
+            {% render 'icon', name: 'sparkles', size: '1rem' %}
+            <span>{{ block.settings.text }}</span>
+          </span>
+        {%- else -%}
+          <span class="marquee-item"><span>ROOM 119 — YOUR SPACE. YOUR RULES</span></span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement marquee",
+  "tag": "section",
+  "class": "r119-marquee-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "label": "Reverse scroll direction",
+      "default": false,
+      "info": "The homepage uses a normal marquee above the header and a reversed one after the hero."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "MAKE SPACE FOR CHAOS"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "text": "MAKE SPACE FOR CHAOS" } },
+      { "type": "item", "settings": { "text": "CALM" } },
+      { "type": "item", "settings": { "text": "AND EVERYTHING IN BETWEEN" } },
+      { "type": "item", "settings": { "text": "ROOM 119 — YOUR SPACE. YOUR RULES" } }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Announcement marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "MAKE SPACE FOR CHAOS" } },
+        { "type": "item", "settings": { "text": "CALM" } },
+        { "type": "item", "settings": { "text": "AND EVERYTHING IN BETWEEN" } },
+        { "type": "item", "settings": { "text": "ROOM 119 — YOUR SPACE. YOUR RULES" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

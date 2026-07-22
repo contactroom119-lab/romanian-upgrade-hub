@@ -1,0 +1,34 @@
+{%- comment -%}
+  Minimal collections-list stub (/collections). Not part of the design scope.
+  See README.
+{%- endcomment -%}
+<section class="r119-section r119-container">
+  <div class="r119-section__head">
+    <div>
+      <div class="r119-eyebrow">Shop by</div>
+      <h2 class="r119-h2">All <span class="accent">collections</span></h2>
+    </div>
+  </div>
+
+  <div class="r119-cat-grid">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="r119-cat grainy">
+        <div class="r119-cat__media">
+          {%- assign img = collection.image | default: collection.featured_image -%}
+          {%- if img != blank -%}
+            <img src="{{ img | image_url: width: 800 }}" alt="{{ collection.title | escape }}" loading="lazy">
+          {%- else -%}
+            <div class="r119-placeholder">{{ collection.title }}</div>
+          {%- endif -%}
+          <span class="r119-cat__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+        </div>
+        <div class="r119-cat__foot">
+          <div><div class="r119-cat__name">{{ collection.title | upcase }}</div></div>
+          <span class="r119-cat__arrow">{% render 'icon', name: 'arrow-up-right', size: '1rem' %}</span>
+        </div>
+      </a>
+    {%- else -%}
+      <div class="r119-placeholder" style="grid-column: 1 / -1; min-height: 12rem;">No collections yet.</div>
+    {%- endfor -%}
+  </div>
+</section>

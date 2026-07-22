@@ -1,0 +1,15 @@
+{
+  "current": {
+    "color_paper": "#f6f2ea",
+    "color_ink": "#1a1613",
+    "color_primary": "#e5512c",
+    "color_accent": "#eaa04d",
+    "use_archivo": false,
+    "grain_overlay": true,
+    "social_instagram": "",
+    "social_tiktok": "",
+    "social_email": "",
+    "hero_video_url": "https://video.wixstatic.com/video/80218c_bae0ed957dbd41d8b641c3763345dc1f/1080p/mp4/file.mp4",
+    "footer_video_url": "https://video.wixstatic.com/video/80218c_1c4b4b6635e8477e9a7d387f78fcb027/1080p/mp4/file.mp4"
+  }
+}

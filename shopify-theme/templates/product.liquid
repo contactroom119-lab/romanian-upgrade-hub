@@ -1,0 +1,25 @@
+{%- comment -%}
+  Minimal product stub — just enough for Shopify to validate the theme and for
+  the homepage's product links / add-to-cart to resolve. Not part of the design
+  scope (homepage + header + footer only). See README "Known gaps".
+{%- endcomment -%}
+<section class="r119-section r119-container">
+  <div style="display: grid; gap: 2rem; grid-template-columns: 1fr; max-width: 900px; margin-inline: auto;">
+    {%- if product.featured_image != blank -%}
+      <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape | default: product.title | escape }}" style="border-radius: var(--radius-xl);">
+    {%- endif -%}
+    <div>
+      <h1 class="font-display" style="font-size: 2.5rem; line-height: 1;">{{ product.title }}</h1>
+      <p class="font-display" style="margin-top: 0.5rem; font-size: 1.25rem; color: var(--primary);">{{ product.price | money }}</p>
+      <div style="margin-top: 1rem; color: var(--muted-foreground);">{{ product.description }}</div>
+
+      {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- form 'product', product -%}
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <button type="submit" class="r119-btn r119-btn--primary" style="margin-top: 1.5rem;"{% unless variant.available %} disabled{% endunless %}>
+          {% if variant.available %}Add to cart{% else %}Sold out{% endif %}
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

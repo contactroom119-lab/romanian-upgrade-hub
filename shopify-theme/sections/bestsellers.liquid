@@ -1,0 +1,58 @@
+{%- comment -%}
+  Bestsellers — ports the dark "Our best sellers — in a blush state" section.
+  Products come from a collection picker; each renders via snippets/product-card.
+{%- endcomment -%}
+
+<section id="bestsellers" class="r119-bestsellers">
+  <div class="r119-container r119-section">
+    <div class="r119-section__head">
+      <div>
+        <div class="r119-eyebrow">{{ section.settings.eyebrow }}</div>
+        <h2 class="r119-h2">
+          {{ section.settings.heading }} <span class="accent">{{ section.settings.heading_accent }}</span>
+        </h2>
+      </div>
+      {%- if section.settings.view_all_url != blank -%}
+        <a href="{{ section.settings.view_all_url }}" class="r119-viewall link-reveal">
+          View all {% render 'icon', name: 'arrow-up-right', size: '1rem' %}
+        </a>
+      {%- elsif section.settings.collection != blank -%}
+        <a href="{{ section.settings.collection.url }}" class="r119-viewall link-reveal">
+          View all {% render 'icon', name: 'arrow-up-right', size: '1rem' %}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="r119-poster-grid">
+      {%- assign coll = section.settings.collection -%}
+      {%- if coll != blank and coll.products.size > 0 -%}
+        {%- for product in coll.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product, number: forloop.index, index: forloop.index0 %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Graceful placeholders when no collection is set {%- endcomment -%}
+        {%- for i in (1..4) -%}
+          {% render 'product-card', product: blank, number: i, index: forloop.index0 %}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bestsellers",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "02 / Best of" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our best sellers —" },
+    { "type": "text", "id": "heading_accent", "label": "Heading (accent)", "default": "in a blush state" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "url", "id": "view_all_url", "label": "\"View all\" link", "info": "Defaults to the collection URL." }
+  ],
+  "presets": [
+    { "name": "Bestsellers" }
+  ]
+}
+{% endschema %}

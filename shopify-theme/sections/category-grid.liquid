@@ -1,0 +1,104 @@
+{%- comment -%}
+  Category grid — ports the React "Shop by category" section.
+  (Source had a typo "cattegory"; fixed here.)
+  Four blocks, each linking to a Shopify collection, with a numbered badge,
+  Anton name, Permanent Marker tagline, and a rotating arrow button.
+{%- endcomment -%}
+
+<section id="categories" class="r119-section r119-container">
+  <div class="r119-section__head">
+    <div>
+      <div class="r119-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="r119-h2">
+        {{ section.settings.heading }} <span class="accent">{{ section.settings.heading_accent }}</span>
+      </h2>
+    </div>
+    {%- if section.settings.view_all_url != blank -%}
+      <a href="{{ section.settings.view_all_url }}" class="r119-viewall link-reveal">
+        View all {% render 'icon', name: 'arrow-up-right', size: '1rem' %}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="r119-cat-grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign coll = block.settings.collection
+        assign img = block.settings.image
+        if img == blank and coll != blank
+          assign img = coll.image
+          if img == blank
+            assign img = coll.featured_image
+          endif
+          if img == blank and coll.products.first != blank
+            assign img = coll.products.first.featured_image
+          endif
+        endif
+        assign card_name = block.settings.heading
+        if card_name == blank and coll != blank
+          assign card_name = coll.title
+        endif
+        assign card_url = '#'
+        if coll != blank
+          assign card_url = coll.url
+        endif
+      -%}
+      <a href="{{ card_url }}" class="r119-cat grainy"{% if coll == blank %} aria-disabled="true"{% endif %} {{ block.shopify_attributes }}>
+        <div class="r119-cat__media">
+          {%- if img != blank -%}
+            <img src="{{ img | image_url: width: 800 }}" alt="{{ card_name | escape }}" loading="lazy" width="800" height="600">
+          {%- else -%}
+            <div class="r119-placeholder">{{ card_name | default: 'Category' }}<br>Pick a collection</div>
+          {%- endif -%}
+          <span class="r119-cat__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+        </div>
+        <div class="r119-cat__foot">
+          <div>
+            <div class="r119-cat__name">{{ card_name | default: 'Category' | upcase }}</div>
+            <div class="r119-cat__tag">{{ block.settings.tagline }}</div>
+          </div>
+          <span class="r119-cat__arrow">{% render 'icon', name: 'arrow-up-right', size: '1rem' %}</span>
+        </div>
+      </a>
+    {%- else -%}
+      <div class="r119-placeholder" style="grid-column: 1 / -1; min-height: 16rem;">Add category blocks in the theme editor</div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category grid",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "01 / Shop by" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by" },
+    { "type": "text", "id": "heading_accent", "label": "Heading (accent word)", "default": "category" },
+    { "type": "url", "id": "view_all_url", "label": "\"View all\" link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "heading", "label": "Name override", "info": "Defaults to the collection title." },
+        { "type": "text", "id": "tagline", "label": "Tagline", "default": "Black. White. Loud." },
+        { "type": "image_picker", "id": "image", "label": "Image override", "info": "Defaults to the collection's featured image." }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Category grid",
+      "blocks": [
+        { "type": "category", "settings": { "tagline": "Black. White. Loud." } },
+        { "type": "category", "settings": { "tagline": "Soft riot, pink noise." } },
+        { "type": "category", "settings": { "tagline": "Warnings, worn well." } },
+        { "type": "category", "settings": { "tagline": "Everything, everywhere." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

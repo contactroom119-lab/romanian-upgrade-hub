@@ -1,0 +1,39 @@
+{%- comment -%}
+  Minimal cart stub. Not part of the design scope. See README.
+{%- endcomment -%}
+<section class="r119-section r119-container">
+  <div class="r119-section__head">
+    <div><h2 class="r119-h2">Your cart</h2></div>
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    {%- form 'cart', cart -%}
+      <table style="width: 100%; border-collapse: collapse;">
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 1rem 0;">
+                {%- if item.image != blank -%}
+                  <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title | escape }}" width="60" style="border-radius: var(--radius-sm); display: inline-block; vertical-align: middle; margin-right: 1rem;">
+                {%- endif -%}
+                <a href="{{ item.url }}" class="font-display">{{ item.product.title }}</a>
+              </td>
+              <td style="text-align: center;">{{ item.quantity }}</td>
+              <td style="text-align: right;" class="font-display">{{ item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem;">
+        <span class="font-display" style="font-size: 1.25rem;">Subtotal: {{ cart.total_price | money }}</span>
+        <button type="submit" name="checkout" class="r119-btn r119-btn--primary">Checkout</button>
+      </div>
+    {%- endform -%}
+  {%- else -%}
+    <div class="r119-placeholder" style="min-height: 10rem;">Your cart is empty.</div>
+    <div style="margin-top: 1.5rem;">
+      <a href="{{ routes.all_products_collection_url }}" class="r119-btn r119-btn--outline">Continue shopping</a>
+    </div>
+  {%- endif -%}
+</section>
