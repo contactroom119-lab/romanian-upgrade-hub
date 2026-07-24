@@ -9,13 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as DespreRouteImport } from './routes/despre'
 import { Route as CustomRouteImport } from './routes/custom'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as OrdersIdRouteImport } from './routes/orders.$id'
+import { Route as OrderIdRouteImport } from './routes/order.$id'
 import { Route as LegalTermeniRouteImport } from './routes/legal.termeni'
 import { Route as LegalReturRouteImport } from './routes/legal.retur'
 import { Route as LegalLivrareRouteImport } from './routes/legal.livrare'
@@ -25,9 +31,24 @@ import { Route as LegalConfidentialitateRouteImport } from './routes/legal.confi
 import { Route as LegalAnpcRouteImport } from './routes/legal.anpc'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DespreRoute = DespreRouteImport.update({
@@ -45,6 +66,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
@@ -58,6 +84,16 @@ const IndexRoute = IndexRouteImport.update({
 const ProductSlugRoute = ProductSlugRouteImport.update({
   id: '/product/$slug',
   path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersIdRoute = OrdersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => OrdersRoute,
+} as any)
+const OrderIdRoute = OrderIdRouteImport.update({
+  id: '/order/$id',
+  path: '/order/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalTermeniRoute = LegalTermeniRouteImport.update({
@@ -104,10 +140,14 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/custom': typeof CustomRoute
   '/despre': typeof DespreRoute
+  '/orders': typeof OrdersRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/sign-in': typeof SignInRoute
   '/category/$slug': typeof CategorySlugRoute
   '/legal/anpc': typeof LegalAnpcRoute
   '/legal/confidentialitate': typeof LegalConfidentialitateRoute
@@ -116,15 +156,21 @@ export interface FileRoutesByFullPath {
   '/legal/livrare': typeof LegalLivrareRoute
   '/legal/retur': typeof LegalReturRoute
   '/legal/termeni': typeof LegalTermeniRoute
+  '/order/$id': typeof OrderIdRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/custom': typeof CustomRoute
   '/despre': typeof DespreRoute
+  '/orders': typeof OrdersRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/sign-in': typeof SignInRoute
   '/category/$slug': typeof CategorySlugRoute
   '/legal/anpc': typeof LegalAnpcRoute
   '/legal/confidentialitate': typeof LegalConfidentialitateRoute
@@ -133,16 +179,22 @@ export interface FileRoutesByTo {
   '/legal/livrare': typeof LegalLivrareRoute
   '/legal/retur': typeof LegalReturRoute
   '/legal/termeni': typeof LegalTermeniRoute
+  '/order/$id': typeof OrderIdRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/custom': typeof CustomRoute
   '/despre': typeof DespreRoute
+  '/orders': typeof OrdersRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/sign-in': typeof SignInRoute
   '/category/$slug': typeof CategorySlugRoute
   '/legal/anpc': typeof LegalAnpcRoute
   '/legal/confidentialitate': typeof LegalConfidentialitateRoute
@@ -151,6 +203,8 @@ export interface FileRoutesById {
   '/legal/livrare': typeof LegalLivrareRoute
   '/legal/retur': typeof LegalReturRoute
   '/legal/termeni': typeof LegalTermeniRoute
+  '/order/$id': typeof OrderIdRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRouteTypes {
@@ -158,10 +212,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/custom'
     | '/despre'
+    | '/orders'
+    | '/profile'
     | '/search'
+    | '/sign-in'
     | '/category/$slug'
     | '/legal/anpc'
     | '/legal/confidentialitate'
@@ -170,15 +228,21 @@ export interface FileRouteTypes {
     | '/legal/livrare'
     | '/legal/retur'
     | '/legal/termeni'
+    | '/order/$id'
+    | '/orders/$id'
     | '/product/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/custom'
     | '/despre'
+    | '/orders'
+    | '/profile'
     | '/search'
+    | '/sign-in'
     | '/category/$slug'
     | '/legal/anpc'
     | '/legal/confidentialitate'
@@ -187,15 +251,21 @@ export interface FileRouteTypes {
     | '/legal/livrare'
     | '/legal/retur'
     | '/legal/termeni'
+    | '/order/$id'
+    | '/orders/$id'
     | '/product/$slug'
   id:
     | '__root__'
     | '/'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/custom'
     | '/despre'
+    | '/orders'
+    | '/profile'
     | '/search'
+    | '/sign-in'
     | '/category/$slug'
     | '/legal/anpc'
     | '/legal/confidentialitate'
@@ -204,16 +274,22 @@ export interface FileRouteTypes {
     | '/legal/livrare'
     | '/legal/retur'
     | '/legal/termeni'
+    | '/order/$id'
+    | '/orders/$id'
     | '/product/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
   CustomRoute: typeof CustomRoute
   DespreRoute: typeof DespreRoute
+  OrdersRoute: typeof OrdersRouteWithChildren
+  ProfileRoute: typeof ProfileRoute
   SearchRoute: typeof SearchRoute
+  SignInRoute: typeof SignInRoute
   CategorySlugRoute: typeof CategorySlugRoute
   LegalAnpcRoute: typeof LegalAnpcRoute
   LegalConfidentialitateRoute: typeof LegalConfidentialitateRoute
@@ -222,16 +298,38 @@ export interface RootRouteChildren {
   LegalLivrareRoute: typeof LegalLivrareRoute
   LegalReturRoute: typeof LegalReturRoute
   LegalTermeniRoute: typeof LegalTermeniRoute
+  OrderIdRoute: typeof OrderIdRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/despre': {
@@ -255,6 +353,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cart': {
       id: '/cart'
       path: '/cart'
@@ -274,6 +379,20 @@ declare module '@tanstack/react-router' {
       path: '/product/$slug'
       fullPath: '/product/$slug'
       preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders/$id': {
+      id: '/orders/$id'
+      path: '/$id'
+      fullPath: '/orders/$id'
+      preLoaderRoute: typeof OrdersIdRouteImport
+      parentRoute: typeof OrdersRoute
+    }
+    '/order/$id': {
+      id: '/order/$id'
+      path: '/order/$id'
+      fullPath: '/order/$id'
+      preLoaderRoute: typeof OrderIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal/termeni': {
@@ -335,13 +454,28 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface OrdersRouteChildren {
+  OrdersIdRoute: typeof OrdersIdRoute
+}
+
+const OrdersRouteChildren: OrdersRouteChildren = {
+  OrdersIdRoute: OrdersIdRoute,
+}
+
+const OrdersRouteWithChildren =
+  OrdersRoute._addFileChildren(OrdersRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
   CustomRoute: CustomRoute,
   DespreRoute: DespreRoute,
+  OrdersRoute: OrdersRouteWithChildren,
+  ProfileRoute: ProfileRoute,
   SearchRoute: SearchRoute,
+  SignInRoute: SignInRoute,
   CategorySlugRoute: CategorySlugRoute,
   LegalAnpcRoute: LegalAnpcRoute,
   LegalConfidentialitateRoute: LegalConfidentialitateRoute,
@@ -350,18 +484,9 @@ const rootRouteChildren: RootRouteChildren = {
   LegalLivrareRoute: LegalLivrareRoute,
   LegalReturRoute: LegalReturRoute,
   LegalTermeniRoute: LegalTermeniRoute,
+  OrderIdRoute: OrderIdRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

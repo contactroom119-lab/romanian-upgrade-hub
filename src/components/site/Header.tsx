@@ -64,7 +64,7 @@ export function Header() {
               className="w-40 bg-transparent text-sm outline-none placeholder:text-paper/50"
             />
           </form>
-          <Link to="/contact" className="rounded-full p-2 transition hover:bg-paper/10" aria-label="Account">
+          <Link to="/sign-in" className="rounded-full p-2 transition hover:bg-paper/10" aria-label="Account">
             <User className="size-5" />
           </Link>
           <Link to="/cart" className="relative rounded-full p-2 transition hover:bg-paper/10" aria-label="Cart">
