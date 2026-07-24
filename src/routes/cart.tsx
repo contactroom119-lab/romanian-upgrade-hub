@@ -110,12 +110,12 @@ function CartPage() {
                   <dd className="font-display text-2xl text-primary">{RON(total)}</dd>
                 </div>
               </dl>
-              <button
-                onClick={() => { clearCart(); setPlaced(true); }}
+              <Link
+                to="/checkout"
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:bg-primary/90"
               >
-                Plătește · {RON(total)} <ArrowRight className="size-4" />
-              </button>
+                Checkout · {RON(total)} <ArrowRight className="size-4" />
+              </Link>
               <div className="mt-3 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
                 Plată securizată · Card / Ramburs / Apple Pay
               </div>
